@@ -46,5 +46,20 @@
     height: 24px;
     width: 24px;
     background-image: url('./images/Vectorpencill__icon.svg');
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: black;
     border: 1px solid #ffffff;
+}
+
+.profile__addButton {
+    margin-top:75px;
+    cursor:pointer;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #ffffff;
+    background-color: black;
+
+
 }
