@@ -1,0 +1,23 @@
+.main{
+    background-color:black;
+}
+
+.header {
+    display:flex;
+    flex-direction: column;
+    margin: 45px 0 0 200px;
+    
+
+    outline:  1px solid red;
+
+}
+
+.header__logo {
+    outline: 1px solid red;
+}
+
+.header__line {
+    outline: 10px solid red;
+
+
+}
