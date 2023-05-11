@@ -1,26 +1,30 @@
 .profile {
   display: flex;
   max-width: 880px;
-  margin: 45px auto auto;
+  margin: 40px auto auto;
+  outline: 1px solid red;
 }
 
 .profile__avatar {
-    margin-top: 40px;
   max-width: 120px;
   max-height: 120px;
   border-radius: 50%;
+  outline: 1px solid red;
 }
 
 .profile__info {
-    margin-top: 62px;
-    max-width: 336px;
-    margin-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  max-width: 336px;
+  margin-left: 30px;
+  outline: 1px solid red;
 }
 
-
-
 .profile__author {
-    margin:0;
+  margin: 0;
+  margin-top: 22px;
+  max-width: 294px;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -30,7 +34,9 @@
 }
 
 .profile__bio {
-    margin:0;
+  margin: 0;
+  margin-top: 16px;
+  margin-bottom: 25px;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -40,26 +46,32 @@
 }
 
 .profile__edit {
-    margin-top: 77px;
-    margin-left: 18px;
-    cursor:pointer;
-    height: 24px;
-    width: 24px;
-    background-image: url('./images/Vectorpencill__icon.svg');
-    background-size: 10px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: black;
-    border: 1px solid #ffffff;
+  margin: 0;
+  margin-top: 37px;
+  margin-left: 18px;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  align-content: baseline;
+  background-image: url("./images/Vectorpencill__icon.svg");
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
+  border: 1px solid #ffffff;
 }
 
 .profile__addButton {
-    margin-top:75px;
-    cursor:pointer;
-    width: 150px;
-    height: 50px;
-    border: 2px solid #ffffff;
-    background-color: black;
-
-
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  background-color: black;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  background-image: url("./images/Vectoradd__icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
