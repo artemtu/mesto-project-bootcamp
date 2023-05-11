@@ -40,6 +40,9 @@
 }
 
 .profile__edit {
+    margin-top: 77px;
+    margin-left: 18px;
+    cursor:pointer;
     height: 24px;
     width: 24px;
     background-image: url('./images/Vectorpencill__icon.svg');
