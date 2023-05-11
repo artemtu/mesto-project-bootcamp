@@ -1,26 +1,2 @@
-.main{
-    
-    background-color:black;
-}
-
-.header {
-    display:flex;
-    flex-direction: column;
-    margin: 45px 0 0 200px;
-    
 
 
-
-}
-
-.header__logo {
-
-}
-
-.header__line {
-    max-width: 880px;
-    margin-top:45px;
-    outline: 1px solid #545454;
-
-
-}

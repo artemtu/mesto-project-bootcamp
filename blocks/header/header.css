@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin: 45px auto auto;
+  max-width: 880px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 934px) {
+  .header {
+    margin: 28px 0 0 0;
+  }
+}
