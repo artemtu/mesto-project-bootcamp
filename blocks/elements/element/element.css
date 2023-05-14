@@ -1,0 +1,10 @@
+.element {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+  max-height: 361px;
+  background-color: white;
+  border-radius: 10px;
+  /* outline: 1px solid red; */
+}

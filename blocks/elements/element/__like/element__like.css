@@ -1,0 +1,17 @@
+.element__like {
+  margin: 30px 30px 0 20px;
+  justify-content: center;
+  width: 22px;
+  height: 19px;
+  border: none;
+  background-color: transparent;
+  background-image: url("./images/Vectorlike__icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  /* outline: 1px solid red; */
+}
+
+.element__like:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
