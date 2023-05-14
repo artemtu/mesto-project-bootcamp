@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  margin: 67px auto auto;
+  max-width: 880px;
+  /* outline: 1px solid red; */
+}
+
+@media (max-width: 900px) {
+  .footer {
+    max-width: 282px;
+    margin-bottom: 36px;
+  }
+}
