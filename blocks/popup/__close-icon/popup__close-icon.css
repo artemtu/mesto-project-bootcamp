@@ -4,7 +4,7 @@
   width: 32px;
   height: 32px;
   cursor: pointer;
-  background-image: url("./images/Close\ Iconclose_icon.svg");
+  background-image: url("../../../images/Close\ Iconclose_icon.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-color: #000;
@@ -12,6 +12,11 @@
   border: 0;
   background-color: transparent;
   z-index: 1;
+}
+
+.popup__close-icon:hover {
+  opacity: 0.6;
+  transition: 0.5s;
 }
 
 @media screen and (max-width: 500px) {
