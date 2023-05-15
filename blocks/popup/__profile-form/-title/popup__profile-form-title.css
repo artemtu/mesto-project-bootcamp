@@ -1,0 +1,20 @@
+.popup__profile-form-title {
+  margin: 0;
+  margin: 34px auto 0 36px;
+  max-width: 330px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__profile-form-title {
+    margin: 25px auto auto;
+    max-width: 238px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
