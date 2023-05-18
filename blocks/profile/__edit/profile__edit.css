@@ -27,5 +27,8 @@
     margin-left: 10px;
     height: 18px;
     width: 18px;
+    background-size: 7.5px 7.5px;
+    background-position: 50% 50%;
+
   }
 }
