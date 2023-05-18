@@ -1,4 +1,11 @@
 .popup__close-icon {
+  display: flex;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  justify-content: flex-end;
+  top: 0;
+  right: 0;
   margin-top: -40px;
   margin-right: -40px;
   width: 32px;
