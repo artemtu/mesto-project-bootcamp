@@ -6,8 +6,25 @@
   box-sizing: border-box;
 }
 
+.header::after {
+  content: '';
+  display: block;
+  opacity: 0.7;
+  margin-top: 41px;
+  border-bottom: 1px solid #545454;
+}
+
+
+
+
 @media (max-width: 934px) {
   .header {
     margin: 28px 0 0 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .header::after {
+    margin: 31.6px 0 0 0;
   }
 }
