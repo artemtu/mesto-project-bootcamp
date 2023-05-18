@@ -1,8 +1,8 @@
-.popup__bio-text {
+.popup__inputs-text {
   width: 358px;
   padding: 0;
   border: none;
-  margin: 30px auto auto;
+  margin: 0 auto auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding-bottom: 13px;
   font-family: "Inter",Arial, Helvetica, sans-serif;
