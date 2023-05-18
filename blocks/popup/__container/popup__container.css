@@ -2,7 +2,7 @@
   display: none;
   position: relative;
   width: 430px;
-  height: 330px;
+
 }
 
 .popup__container_active {
@@ -12,6 +12,5 @@
 @media screen and (max-width: 500px) {
   .popup__container {
     width: 282px;
-    height: 322px;
   }
 }
