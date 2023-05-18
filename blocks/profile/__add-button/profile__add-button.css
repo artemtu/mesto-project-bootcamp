@@ -10,6 +10,7 @@
   margin-top: 35px;
   margin-bottom: 35px;
   background-image: url("../../../images/Vectoradd__icon.svg");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
