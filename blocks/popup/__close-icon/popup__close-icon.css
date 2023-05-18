@@ -16,7 +16,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: #000;
-  background-size: cover;
   border: 0;
   background-color: transparent;
   z-index: 1;
@@ -30,5 +29,6 @@
 @media screen and (max-width: 500px) {
   .popup__close-icon {
     margin-right: -12px;
+    background-size: 20px 20px;
   }
 }
