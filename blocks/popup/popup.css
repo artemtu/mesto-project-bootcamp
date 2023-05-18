@@ -7,5 +7,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+
+.popup:not(:has(.popup__container_active)) {
+  background-color: transparent; /* Стандартный фон страницы */
+}
+
+.popup:has(.popup__container_active) {
+  background-color: rgba(0, 0, 0, 0.5); /* Фон при активном попапе */
 }
