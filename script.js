@@ -1,12 +1,18 @@
-let profileSection = document.querySelector('.profile');
-let profileButton = profileSection.querySelector('.profile__edit')
-let popupSection = document.querySelector('.popup')
-let popupContainer = popupSection.querySelector('.popup__container')
-let closePopup = document.querySelector('.popup__close-icon');
+const profileSection = document.querySelector('.profile');
+const profileButton = profileSection.querySelector('.profile__edit')
+
+const closePopup = document.querySelector('.popup__close-icon');
+const nameInput = document.getElementById('popup__inputs_name');
+const jobInput = document.getElementById('popup__inputs_bio');
+const currentName = profileSection.querySelector('.profile__author').textContent;
+const currentJob = profileSection.querySelector('.profile__bio').textContent;
 
 
 function activeAndClosePopup() {
-    profileButton.addEventListener('click', () => {
+    const popupSection = document.querySelector('.popup')
+    const popupContainer = popupSection.querySelector('.popup__container')
+
+    profileButton.addEventListener('click', () => {  
         popupSection.classList.add('popup__container_active');
         popupContainer.classList.add('popup__container_active');
 
