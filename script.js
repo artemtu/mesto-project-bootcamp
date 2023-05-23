@@ -40,9 +40,7 @@ function handleFormSubmit(evt) {
 activeAndClosePopup();
 formElement.addEventListener("submit", handleFormSubmit);
 
-const elementSection = document.querySelector(".element");
-const elementImage = elementSection.querySelector(".element__image");
-const elementTitle = elementSection.querySelector(".element__title");
+// добавление карточек на страницу
 
 const initialCards = [
   {
@@ -71,17 +69,74 @@ const initialCards = [
   },
 ];
 
-const elementSections = document.querySelectorAll(".element");
+const template = document.getElementById('cards');
+const cardTemplate = template.content.querySelector('.element');
 
-initialCards.forEach((card, index) => {
-  const elementSection = elementSections[index];
-  const elementImage = elementSection.querySelector(".element__image");
-  const elementTitle = elementSection.querySelector(".element__title");
-  elementTitle.textContent = card.name;
-  elementImage.src = card.link;
-  elementImage.alt = card.name;
+function createCard(name, link) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImage = cardElement.querySelector('.element__image');
+  const textTitle = cardElement.querySelector('.element__title');
+
+  textTitle.textContent = name;
+  cardImage.src = link;
+  cardImage.alt = name;
+
+  return cardElement;
+};
+
+initialCards.forEach((card) => {
+  const name = card.name;
+  const link = card.link;
+  const elementsContainer = document.querySelector('.elements');
+  const createdCard = createCard(name, link);
+  elementsContainer.appendChild(createdCard);
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function createCard(name, link){
+//   const container = document.querySelector('#cards');
+//   const element = document.createElement('div')
+//   element.classList.add('element');
+
+//   const image = document.createElement('img');
+//   image.classList.add('element__image')
+//   image.setAttribute('src', link);
+//   image.setAttribute('alt', name);
+//   element.appendChild(image);
+
+//   const title = document.createElement('h3');
+//   title.textContent = name;
+//   title.classList.add('element__title');
+//   element.appendChild(title);
+
+//   const button = document.createElement('button');
+//   button.classList.add('element__like');
+//   element.appendChild(button);
+
+//   container.appendChild(element);
+// };
 
 
