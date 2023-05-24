@@ -144,16 +144,28 @@ function addCardToPage(name, link) {
 
 
 
-function likeCard() {
-  const likeButtons = document.querySelectorAll(".element__like");
+// function likeCard() {
+//   const likeButtons = document.querySelectorAll(".element__like");
   
-  likeButtons.forEach((likeButton) => {
-    likeButton.addEventListener("click", () => {
-      likeButton.style.backgroundImage = "url('../../images/Unionlike__actived.svg')";
-    });
-  });
+//   likeButtons.forEach((likeButton) => {
+//     likeButton.addEventListener("click", () => {
+//       likeButton.style.backgroundImage = "url('../../images/Unionlike__actived.svg')";
+//     });
+//   });
 
   
+// }
+
+// likeCard();
+
+function likeCard() {
+  const likeButtons = document.querySelectorAll(".element__like");
+
+  likeButtons.forEach((likeButton) => {
+    likeButton.addEventListener("click", () => {
+      likeButton.classList.toggle("element__liked");
+    });
+  });
 }
 
 likeCard();
