@@ -26,6 +26,9 @@ const cardTitle = cardTemplate.querySelector('.element__title');
 
 
 
+
+
+
 // функция открытия и закрытия попапов
 function activeAndClosePopup() {
   bioInput.value = bio.textContent;
@@ -138,6 +141,25 @@ function addCardToPage(name, link) {
 
   elementsContainer.insertBefore(createdCard, firstCard);
 };
+
+
+
+function likeCard() {
+  const likeButtons = document.querySelectorAll(".element__like");
+  
+  likeButtons.forEach((likeButton) => {
+    likeButton.addEventListener("click", () => {
+      likeButton.style.backgroundImage = "url('../../images/Unionlike__actived.svg')";
+    });
+  });
+
+  
+}
+
+likeCard();
+
+
+
 
 
 
