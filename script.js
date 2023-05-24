@@ -94,16 +94,28 @@ initialCards.forEach((card) => {
 
 
 
+const popupSectionCard = document.querySelector(".popup_add");
+const popupContainerCard = popupSectionCard.querySelector(".popup__container_add");
+const closePopupButtonCard = document.querySelector(".popup-close-card");
+const CardButton = document.querySelector(".profile__add-button");
+const formElementCard = document.querySelector(".popup__card-form");
+const placeNameInput = document.getElementById("popup__inputs_place_name");
+const linkInput = document.getElementById("popup__inputs_place_link");
+
+function OpenAdd() {
+  CardButton.addEventListener("click", () => {
+    popupSectionCard.classList.add("popup__container_active");
+    popupContainerCard.classList.add("popup__container_active");
+  });
+
+  closePopupButtonCard.addEventListener("click", () => {
+    popupSectionCard.classList.remove("popup__container_active");
+    popupContainerCard.classList.remove("popup__container_active");
+  });
+}
 
 
-
-
-
-
-
-
-
-
+OpenAdd()
 
 
 
