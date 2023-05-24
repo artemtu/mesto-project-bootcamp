@@ -140,8 +140,25 @@ function addCardToPage(name, link) {
   const firstCard = elementsContainer.firstChild;
 
   elementsContainer.insertBefore(createdCard, firstCard);
-};
+  
+  const likeButton = createdCard.querySelector(".element__like");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("element__liked");
+})};
 
+
+
+function likeCard() {
+  const likeButtons = document.querySelectorAll(".element__like");
+
+  likeButtons.forEach((likeButton) => {
+    likeButton.addEventListener("click", () => {
+      likeButton.classList.toggle("element__liked");
+    });
+  });
+}
+
+likeCard();
 
 
 // function likeCard() {
@@ -158,17 +175,7 @@ function addCardToPage(name, link) {
 
 // likeCard();
 
-function likeCard() {
-  const likeButtons = document.querySelectorAll(".element__like");
 
-  likeButtons.forEach((likeButton) => {
-    likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("element__liked");
-    });
-  });
-}
-
-likeCard();
 
 
 
