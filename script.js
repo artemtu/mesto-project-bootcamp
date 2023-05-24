@@ -60,6 +60,15 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
+  const name = placeNameInput.value; 
+  const link = linkInput.value; 
+
+  addCardToPage(name, link); 
+
+
+  formElementCard.reset();
+  popupSectionCard.classList.remove("popup__container_active");
+  popupContainerCard.classList.remove("popup__container_active");
 
   popupSection.classList.remove("popup__container_active");
   popupContainer.classList.remove("popup__container_active");
@@ -67,6 +76,7 @@ function handleFormSubmit(evt) {
 
 activeAndClosePopup();
 formElement.addEventListener("submit", handleFormSubmit);
+formElementCard.addEventListener("submit", handleFormSubmit);
 
 // добавление карточек на страницу
 
@@ -124,28 +134,10 @@ function addCardToPage(name, link) {
   const createdCard = createCard(name, link); 
   const elementsContainer = document.querySelector('.elements');
   elementsContainer.appendChild(createdCard); 
+  const firstCard = elementsContainer.firstChild;
+
+  elementsContainer.insertBefore(createdCard, firstCard);
 };
-
-function handleFormSubmit(evt) {
-  evt.preventDefault(); 
-  const name = placeNameInput.value; 
-  const link = linkInput.value; 
-
-  addCardToPage(name, link); 
-
-
-  formElementCard.reset();
-  popupSectionCard.classList.remove("popup__container_active");
-  popupContainerCard.classList.remove("popup__container_active");
-}
-
-
-
-formElementCard.addEventListener("submit", handleFormSubmit);
-
-
-
-
 
 
 
