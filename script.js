@@ -19,6 +19,12 @@ const formElementCard = document.querySelector(".popup__card-form");
 const placeNameInput = document.getElementById("popup__inputs_place_name");
 const linkInput = document.getElementById("popup__inputs_place_link");
 
+const template = document.getElementById('cards');
+const cardTemplate = template.content.querySelector('.element');
+const cardImage = cardTemplate.querySelector('.element__image');
+const cardTitle = cardTemplate.querySelector('.element__title');
+
+
 
 // функция открытия и закрытия попапов
 function activeAndClosePopup() {
@@ -91,8 +97,7 @@ const initialCards = [
   },
 ];
 
-const template = document.getElementById('cards');
-const cardTemplate = template.content.querySelector('.element');
+
 
 function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -115,13 +120,28 @@ initialCards.forEach((card) => {
 });
 
 
+function addCardToPage(name, link) {
+  const createdCard = createCard(name, link); 
+  const elementsContainer = document.querySelector('.elements');
+  elementsContainer.appendChild(createdCard); 
+};
+
+function handleFormSubmit(evt) {
+  evt.preventDefault(); 
+  const name = placeNameInput.value; 
+  const link = linkInput.value; 
+
+  addCardToPage(name, link); 
+
+
+  formElementCard.reset();
+  popupSectionCard.classList.remove("popup__container_active");
+  popupContainerCard.classList.remove("popup__container_active");
+}
 
 
 
-
-
-
-
+formElementCard.addEventListener("submit", handleFormSubmit);
 
 
 
