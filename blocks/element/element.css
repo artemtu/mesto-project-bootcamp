@@ -1,6 +1,7 @@
 .element {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
   justify-content: space-between;
   max-width: 100%;
   background-color: white;
