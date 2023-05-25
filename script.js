@@ -172,7 +172,8 @@ function deleteCard() {
 
 deleteCard();
 
-const popupContainerImage = document.querySelector(".popup__container_image");
+const popupSectionImage = document.querySelector(".popup-image");
+const popupContainerImage = popupSectionImage.querySelector(".popup__container_image");
 const popupImage = popupContainerImage.querySelector(".popup__image");
 const popupImageTitle = popupContainerImage.querySelector(".popup__title");
 
@@ -184,16 +185,22 @@ const allCards = document.querySelectorAll(".element__image");
 function clickOnCard() {
   allCards.forEach((card) => {
     card.addEventListener("click", () => {
-      console.log("click was done");
+      const imageUrl = card.getAttribute('src');
+      const imageAlt = card.getAttribute('alt');
+      popupImage.setAttribute('src', imageUrl);
+      popupImage.setAttribute('alt', imageAlt);
+      popupImageTitle.textContent = card.alt;
+      popupSectionImage.classList.add("popup__container_active");
+      popupContainerImage.classList.add("popup__container_active");
+      
+
     });
   });
 }
 
 clickOnCard();
 
-
-
-
+console.log(allCards);
 
 
 
