@@ -15,8 +15,9 @@
 - Grid-layout
 - Адаптивная вёрстка пож размеры экранов от 320px до 1280px
 - BEM NESTED
+- JavaScript: выбор селекторов, написание функций для открытия и закрытия попапов, добавление элементов через template
 
-## ВНИМАНИЕ: это первая итерация проекта. чтобы проверить попап добавьте еще один класс "popup__container_active" в "popup__container"!
+## ВНИМАНИЕ: это не финальная версия проекта, он еще будет дорабатываться
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 * [Ссылка на сайт](https://artemtu.github.io/mesto-project-bootcamp/)
