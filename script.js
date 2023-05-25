@@ -147,7 +147,7 @@ function addCardToPage(name, link) {
 })};
 
 
-
+// лайк карточек
 function likeCard() {
   const likeButtons = document.querySelectorAll(".element__like");
 
@@ -161,23 +161,22 @@ function likeCard() {
 likeCard();
 
 
-// function likeCard() {
-//   const likeButtons = document.querySelectorAll(".element__like");
-  
-//   likeButtons.forEach((likeButton) => {
-//     likeButton.addEventListener("click", () => {
-//       likeButton.style.backgroundImage = "url('../../images/Unionlike__actived.svg')";
-//     });
-//   });
 
-  
-// }
-
-// likeCard();
+// удаление карточек
+const cards = document.querySelectorAll('.element');
 
 
 
+function deleteCard(){
+  cards.forEach((card) => {
+    const buttonDeleteCard = card.querySelector('.element__delete-button');
+    buttonDeleteCard.addEventListener("click", () => {
+      card.remove();
+    });
+  });
+};
 
+deleteCard()
 
 
 
