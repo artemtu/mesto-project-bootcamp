@@ -143,8 +143,14 @@ function addCardToPage(name, link) {
   
   const likeButton = createdCard.querySelector(".element__like");
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__liked");
-})};
+    likeButton.classList.toggle("element__liked")});
+    
+  const buttonDeleteCard = createdCard.querySelector('.element__delete-button');
+  buttonDeleteCard.addEventListener("click", () => {
+    createdCard.remove();
+  });
+
+};
 
 
 // лайк карточек
