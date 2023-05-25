@@ -2,11 +2,20 @@
   display: none;
   position: relative;
   width: 430px;
-
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.1s, opacity 0.5s linear;
 }
+
+
 
 .popup__container_active {
   display: flex;
+  opacity: 1;
+  visibility: visible;
+
+  
+
 }
 
 @media screen and (max-width: 500px) {
