@@ -26,6 +26,8 @@ const cardTemplate = template.content.querySelector(".element");
 const cardImage = cardTemplate.querySelector(".element__image");
 const cardTitle = cardTemplate.querySelector(".element__title");
 
+
+
 // функция открытия/закрытия попапа и возмможность ставить лайк и удалять
 
 function activeAndClosePopup() {
@@ -176,6 +178,8 @@ const popupSectionImage = document.querySelector(".popup-image");
 const popupContainerImage = popupSectionImage.querySelector(".popup__container_image");
 const popupImage = popupContainerImage.querySelector(".popup__image");
 const popupImageTitle = popupContainerImage.querySelector(".popup__title");
+const closePopupImage = popupSectionImage.querySelector(".popup-close-image");
+
 
 
 
@@ -192,15 +196,21 @@ function clickOnCard() {
       popupImageTitle.textContent = card.alt;
       popupSectionImage.classList.add("popup__container_active");
       popupContainerImage.classList.add("popup__container_active");
-      
+
+    });
+    closePopupImage.addEventListener("click", () => {
+      popupSectionImage.classList.remove("popup__container_active");
+      popupContainerImage.classList.remove("popup__container_active");
 
     });
   });
+  
+
 }
 
 clickOnCard();
 
-console.log(allCards);
+
 
 
 
