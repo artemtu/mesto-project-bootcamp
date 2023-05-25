@@ -39,6 +39,14 @@
 
 @import url('../blocks/element/__delete/element__delete-button.css');
 
+@import url('../blocks/popup/__image/popup__image.css');
+
+@import url('../blocks/popup/popup-image/popup-image.css');
+
+@import url('../blocks/popup/__container_image/popup__container_image.css');
+
+
+
 
 
 
