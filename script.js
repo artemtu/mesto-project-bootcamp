@@ -12,24 +12,22 @@ const bio = document.querySelector(".profile__bio");
 
 // контстанты для попапа добавления карточки
 const popupSectionCard = document.querySelector(".popup_add");
-const popupContainerCard = popupSectionCard.querySelector(".popup__container_add");
+const popupContainerCard = popupSectionCard.querySelector(
+  ".popup__container_add"
+);
 const closePopupButtonCard = document.querySelector(".popup-close-card");
 const CardButton = document.querySelector(".profile__add-button");
 const formElementCard = document.querySelector(".popup__card-form");
 const placeNameInput = document.getElementById("popup__inputs_place_name");
 const linkInput = document.getElementById("popup__inputs_place_link");
 
-const template = document.getElementById('cards');
-const cardTemplate = template.content.querySelector('.element');
-const cardImage = cardTemplate.querySelector('.element__image');
-const cardTitle = cardTemplate.querySelector('.element__title');
+const template = document.getElementById("cards");
+const cardTemplate = template.content.querySelector(".element");
+const cardImage = cardTemplate.querySelector(".element__image");
+const cardTitle = cardTemplate.querySelector(".element__title");
 
+// функция открытия/закрытия попапа и возмможность ставить лайк и удалять
 
-
-
-
-
-// функция открытия и закрытия попапов
 function activeAndClosePopup() {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
@@ -58,16 +56,14 @@ function activeAndClosePopup() {
   authorNameInput.value = authorName.textContent;
 }
 
-
 function handleFormSubmit(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
-  const name = placeNameInput.value; 
-  const link = linkInput.value; 
+  const name = placeNameInput.value;
+  const link = linkInput.value;
 
-  addCardToPage(name, link); 
-
+  addCardToPage(name, link);
 
   formElementCard.reset();
   popupSectionCard.classList.remove("popup__container_active");
@@ -110,48 +106,44 @@ const initialCards = [
   },
 ];
 
-
-
 function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector('.element__image');
-  const textTitle = cardElement.querySelector('.element__title');
+  const cardImage = cardElement.querySelector(".element__image");
+  const textTitle = cardElement.querySelector(".element__title");
 
   textTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
 
   return cardElement;
-};
+}
 
 initialCards.forEach((card) => {
   const name = card.name;
   const link = card.link;
-  const elementsContainer = document.querySelector('.elements');
+  const elementsContainer = document.querySelector(".elements");
   const createdCard = createCard(name, link);
   elementsContainer.appendChild(createdCard);
 });
 
-
 function addCardToPage(name, link) {
-  const createdCard = createCard(name, link); 
-  const elementsContainer = document.querySelector('.elements');
-  elementsContainer.appendChild(createdCard); 
+  const createdCard = createCard(name, link);
+  const elementsContainer = document.querySelector(".elements");
+  elementsContainer.appendChild(createdCard);
   const firstCard = elementsContainer.firstChild;
 
   elementsContainer.insertBefore(createdCard, firstCard);
-  
+
   const likeButton = createdCard.querySelector(".element__like");
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__liked")});
-    
-  const buttonDeleteCard = createdCard.querySelector('.element__delete-button');
+    likeButton.classList.toggle("element__liked");
+  });
+
+  const buttonDeleteCard = createdCard.querySelector(".element__delete-button");
   buttonDeleteCard.addEventListener("click", () => {
     createdCard.remove();
   });
-
-};
-
+}
 
 // лайк карточек
 function likeCard() {
@@ -166,28 +158,56 @@ function likeCard() {
 
 likeCard();
 
-
-
 // удаление карточек
-const cards = document.querySelectorAll('.element');
+const cards = document.querySelectorAll(".element");
 
-
-
-function deleteCard(){
+function deleteCard() {
   cards.forEach((card) => {
-    const buttonDeleteCard = card.querySelector('.element__delete-button');
+    const buttonDeleteCard = card.querySelector(".element__delete-button");
     buttonDeleteCard.addEventListener("click", () => {
       card.remove();
     });
   });
-};
+}
 
-deleteCard()
+deleteCard();
+
+const popupContainerImage = document.querySelector(".popup__container_image");
+const popupImage = popupContainerImage.querySelector(".popup__image");
+const popupImageTitle = popupContainerImage.querySelector(".popup__title");
+
+
+
+// тестовая функция (проверка на клик)
+const allCards = document.querySelectorAll(".element__image");
+
+function clickOnCard() {
+  allCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      console.log("click was done");
+    });
+  });
+}
+
+clickOnCard();
 
 
 
 
 
+
+
+
+
+
+// function listenToMe(){
+//   allCards.addEventListener("click", () => {
+//     console.log('Click was done');
+
+//   });
+// };
+
+// listenToMe();
 
 // function createCard(name, link){
 //   const container = document.querySelector('#cards');
@@ -211,5 +231,3 @@ deleteCard()
 
 //   container.appendChild(element);
 // };
-
-
