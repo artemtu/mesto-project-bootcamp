@@ -2,16 +2,17 @@
 
 // попап Профиль
 const popupProfile = document.querySelector(".popup-profile");
-const popupProfileContainer = document.querySelector(
+const popupProfileContainer = popupProfile.querySelector(
   ".popup__container_profile"
 );
 const popupEditProfileButton = document.querySelector(".profile__edit");
-const popupCloseProfile = document.querySelector(".popup-close-profile");
+const popupCloseProfile = popupProfileContainer.querySelector(".popup-close-profile");
+const popupProfileForm = document.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-const popupProfileForm = document.querySelector(".popup__profile-form");
+
 
 // попап добавление карточки
 const popupCardAdd = document.querySelector(".popup_add");
