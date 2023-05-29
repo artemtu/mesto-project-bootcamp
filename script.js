@@ -165,3 +165,13 @@ function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
+
+
+// ==================================================//
+
+// валидация//
+
+
+
+console.dir(popupProfileForm.popup__inputs_name)
+
