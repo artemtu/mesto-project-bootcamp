@@ -52,7 +52,7 @@
                 <form class="popup__profile-form popup__card-form" name="card__edit">
                     <h2 class="popup__profile-form-title popup__card-form-title ">Новое место</h2>
                     <div class="popup__inputs">
-                        <input type="text" id="popup__inputs_place_name" class="popup__inputs-text" name="place_name" placeholder="Название" required />
+                        <input type="text" id="popup__inputs_place_name" class="popup__inputs-text" name="place_name" placeholder="Название" required minlength="2" maxlength="30" />
                         <input type="url" id="popup__inputs_place_link" name="place_link" class="popup__inputs-text" placeholder="Ссылка" required />
                     </div>
                     <button class="popup__button" type="submit">Сохранить</button>
