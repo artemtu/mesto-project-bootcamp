@@ -173,10 +173,8 @@ function addCardToPage(name, link) {
 
 const profileForms = document.forms.profile__edit;
 const profileNameField = profileForms.popup__inputs_name;
+const profileBioField = profileForms.popup__inputs_bio;
 
-const errorField = document.getElementById("error-popup__inputs_name");
-
-// console.log(profileNameField);
 
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -187,16 +185,23 @@ function handleFormSubmitProfile(evt) {
 
 
 profileNameField.addEventListener('input', checkValid)
+profileBioField.addEventListener('input', checkValid)
 
 
 function checkValid(){
-  const spanId = `error-${profileNameField.id}`;
-  if (profileNameField.validity.valid) {
-    const nameError = document.getElementById(spanId);
+  const spanNameError = `error-${profileNameField.id}`;
+  const spanBioError = `error-${profileBioField.id}`;
+  if (profileNameField.validity.valid && profileBioField.validity.valid) {
+    const nameError = document.getElementById(spanNameError);
     nameError.textContent = "";
+    const bioError = document.getElementById(spanBioError);
+    bioError.textContent = "";
   } else {
-    const nameError = document.getElementById(spanId);
+    const nameError = document.getElementById(spanNameError);
     nameError.textContent = profileNameField.validationMessage;
+    const bioError = document.getElementById(spanBioError);
+    bioError.textContent = profileBioField.validationMessage;
+
   }
 };
 
