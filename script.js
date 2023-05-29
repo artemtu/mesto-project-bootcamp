@@ -173,37 +173,36 @@ function addCardToPage(name, link) {
 
 const profileForms = document.forms.profile__edit;
 const profileNameField = profileForms.popup__inputs_name;
-const profileBioField = profileForms.popup__inputs_bio;
-
-
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
-  authorName.textContent = authorNameInput.value;
-  bio.textContent = bioInput.value;
-  closePopup(popupProfile, popupProfileContainer);
+  // authorName.textContent = authorNameInput.value;
+  // bio.textContent = bioInput.value;
+  // closePopup(popupProfile, popupProfileContainer);
 }
 
+function showError(input) {
+  const spanId = `error-${input.id}`;
+  const errorField = document.getElementById(spanId);
+  errorField.textContent = input.validationMessage;
+}
 
-profileNameField.addEventListener('input', checkValid)
-profileBioField.addEventListener('input', checkValid)
+function hideError(input) {
+  const spanId = `error-${input.id}`;
+  const errorField = document.getElementById(spanId);
+  errorField.textContent = "";
+}
 
-
-function checkValid(){
-  const spanNameError = `error-${profileNameField.id}`;
-  const spanBioError = `error-${profileBioField.id}`;
-  if (profileNameField.validity.valid && profileBioField.validity.valid) {
-    const nameError = document.getElementById(spanNameError);
-    nameError.textContent = "";
-    const bioError = document.getElementById(spanBioError);
-    bioError.textContent = "";
+function checkValid(input) {
+  if (input.validity.valid) {
+    hideError(input);
   } else {
-    const nameError = document.getElementById(spanNameError);
-    nameError.textContent = profileNameField.validationMessage;
-    const bioError = document.getElementById(spanBioError);
-    bioError.textContent = profileBioField.validationMessage;
-
+    showError(input);
   }
-};
+}
 
+const inputList = document.querySelectorAll(".popup__inputs-text");
 
-popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
+inputList.forEach((input) => {
+  input.addEventListener("input", () => checkValid(input));
+});
+
