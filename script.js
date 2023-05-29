@@ -6,13 +6,14 @@ const popupProfileContainer = popupProfile.querySelector(
   ".popup__container_profile"
 );
 const popupEditProfileButton = document.querySelector(".profile__edit");
-const popupCloseProfile = popupProfileContainer.querySelector(".popup-close-profile");
+const popupCloseProfile = popupProfileContainer.querySelector(
+  ".popup-close-profile"
+);
 const popupProfileForm = document.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-
 
 // попап добавление карточки
 const popupCardAdd = document.querySelector(".popup_add");
@@ -65,14 +66,14 @@ popupCloseProfile.addEventListener("click", () => {
   closePopup(popupProfile, popupProfileContainer);
 });
 
-function handleFormSubmitProfile(evt) {
-  evt.preventDefault();
-  authorName.textContent = authorNameInput.value;
-  bio.textContent = bioInput.value;
-  closePopup(popupProfile, popupProfileContainer);
-}
+// function handleFormSubmitProfile(evt) {
+//   evt.preventDefault();
+//   authorName.textContent = authorNameInput.value;
+//   bio.textContent = bioInput.value;
+//   closePopup(popupProfile, popupProfileContainer);
+// }
 
-popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
+// popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
 //=====================================================//
 
@@ -166,12 +167,38 @@ function addCardToPage(name, link) {
   elementsContainer.prepend(createdCard);
 }
 
-
 // ==================================================//
 
 // валидация//
 
+const profileForms = document.forms.profile__edit;
+const profileNameField = profileForms.popup__inputs_name;
+
+const errorField = document.getElementById("error-popup__inputs_name");
+
+// console.log(profileNameField);
+
+function handleFormSubmitProfile(evt) {
+  evt.preventDefault();
+  authorName.textContent = authorNameInput.value;
+  bio.textContent = bioInput.value;
+  closePopup(popupProfile, popupProfileContainer);
+}
 
 
-console.dir(popupProfileForm.popup__inputs_name)
+profileNameField.addEventListener('input', checkValid)
 
+
+function checkValid(){
+  const spanId = `error-${profileNameField.id}`;
+  if (profileNameField.validity.valid) {
+    const nameError = document.getElementById(spanId);
+    nameError.textContent = "";
+  } else {
+    const nameError = document.getElementById(spanId);
+    nameError.textContent = profileNameField.validationMessage;
+  }
+};
+
+
+popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
