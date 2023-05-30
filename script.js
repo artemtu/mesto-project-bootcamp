@@ -17,7 +17,7 @@ const bio = document.querySelector(".profile__bio");
 
 // попап добавление карточки
 const popupCardAdd = document.querySelector(".popup_add");
-const popupCardConteiner = document.querySelector(".popup__container_add");
+const popupCardContainer = document.querySelector(".popup__container_add");
 const popupCardButton = document.querySelector(".profile__add-button");
 const popupCloseCard = document.querySelector(".popup-close-card");
 const popupCardForm = document.querySelector(".popup__card-form");
@@ -78,11 +78,11 @@ popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 //=====================================================//
 
 popupCardButton.addEventListener("click", () => {
-  openPopup(popupCardAdd, popupCardConteiner);
+  openPopup(popupCardAdd, popupCardContainer);
 });
 
 popupCloseCard.addEventListener("click", () => {
-  closePopup(popupCardAdd, popupCardConteiner);
+  closePopup(popupCardAdd, popupCardContainer);
 });
 
 function handleFormSubmitCard(evt) {
@@ -90,7 +90,7 @@ function handleFormSubmitCard(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
   addCardToPage(name, link);
-  closePopup(popupCardAdd, popupCardConteiner);
+  closePopup(popupCardAdd, popupCardContainer);
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
@@ -226,24 +226,30 @@ checkFormValidity(cardForm, cardSubmitButton);
 
 //==============================================//
 
-// закрытие попапа - клик и esc//
+// закрытие попапа - клик overlay и esc//
 
-// const popupLists = document.querySelectorAll('.popup')
+const popupLists = document.querySelectorAll(".popup");
+
+function closePopupOverlay(popupSection, popupContainer) {
+  popupLists.forEach((popup) => {
+    popup.addEventListener("mousedown", (evt) => {
+      if (evt.target === popup) {
+        closePopup(popupSection, popupContainer);
+      }
+    });
+  });
+}
+
+closePopupOverlay(popupProfile, popupProfileContainer);
+closePopupOverlay(popupCardAdd, popupCardContainer);
+closePopupOverlay(popupSectionImage, popupImageContainer);
 
 // popupLists.forEach((popup) => {
 //   popup.addEventListener("mousedown", (evt) => {
-//     evt.target.classList.contains(popup);
-//     closePopup(popup)
+//     if(evt.target === popup){
+//       closePopup(popupProfile,popupProfileContainer)
+//       closePopup(popupCardAdd,popupCardConteiner)
+//       closePopup(popupSectionImage,popupImageContainer)
+//     }
 //   });
 // });
-
-// popupProfile.addEventListener("mousedown", (event) => {
-//   if (event.target.classList.contains("popupProfile"));
-//   closePopup();
-// });
-
-popupProfile.addEventListener("mousedown", (event) => {
-  if (event.target === popupProfile) {
-    closePopup(popupProfile, popupProfileContainer);
-  }
-});
