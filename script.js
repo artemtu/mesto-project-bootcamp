@@ -66,14 +66,14 @@ popupCloseProfile.addEventListener("click", () => {
   closePopup(popupProfile, popupProfileContainer);
 });
 
-// function handleFormSubmitProfile(evt) {
-//   evt.preventDefault();
-//   authorName.textContent = authorNameInput.value;
-//   bio.textContent = bioInput.value;
-//   closePopup(popupProfile, popupProfileContainer);
-// }
+function handleFormSubmitProfile(evt) {
+  evt.preventDefault();
+  authorName.textContent = authorNameInput.value;
+  bio.textContent = bioInput.value;
+  closePopup(popupProfile, popupProfileContainer);
+}
 
-// popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
+popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
 //=====================================================//
 
@@ -171,14 +171,7 @@ function addCardToPage(name, link) {
 
 // валидация//
 
-const profileForms = document.forms.profile__edit;
-const profileNameField = profileForms.popup__inputs_name;
-function handleFormSubmitProfile(evt) {
-  evt.preventDefault();
-  // authorName.textContent = authorNameInput.value;
-  // bio.textContent = bioInput.value;
-  // closePopup(popupProfile, popupProfileContainer);
-}
+
 
 function showError(input) {
   const spanId = `error-${input.id}`;
