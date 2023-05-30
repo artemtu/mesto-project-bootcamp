@@ -19,6 +19,17 @@
   line-height: 22px;
 }
 
+
+.popup__button:hover {
+  background-color:rgba(0, 0, 0, 0.8);
+}
+
+.popup__button:disabled {
+  background-color:#E5E5E5;;
+}
+
+
+
 @media screen and (max-width: 500px) {
   .popup__button {
     margin: 45px auto 25px auto;
