@@ -218,12 +218,12 @@ const cardSubmitButton = document.getElementById("card-submit");
 inputList.forEach((input) => {
   input.addEventListener("input", () => {
     checkValid(input);
-    checkFormValidity(profileForm, profileSubmitButton);
+    checkFormValidity(profileForm, profileSubmitButton)
     checkFormValidity(cardForm, cardSubmitButton);
 
   });
 });
 
 
-checkFormValidity(profileForm, profileSubmitButton)
+
 checkFormValidity(cardForm, cardSubmitButton)
