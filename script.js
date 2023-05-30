@@ -214,16 +214,41 @@ const inputList = document.querySelectorAll(".popup__inputs-text");
 const profileSubmitButton = document.getElementById("profile-submit");
 const cardSubmitButton = document.getElementById("card-submit");
 
-
 inputList.forEach((input) => {
   input.addEventListener("input", () => {
     checkValid(input);
-    checkFormValidity(profileForm, profileSubmitButton)
+    checkFormValidity(profileForm, profileSubmitButton);
     checkFormValidity(cardForm, cardSubmitButton);
-
   });
 });
 
+checkFormValidity(cardForm, cardSubmitButton);
+
+//==============================================//
+
+// закрытие попапа - клик и esc//
+
+// const popupLists = document.querySelectorAll('.popup')
+
+// popupLists.forEach((popup) => {
+//   popup.addEventListener("mousedown", (evt) => {
+//     evt.target.classList.contains(popup);
+//     closePopup(popup)
+//   });
+// });
+
+// popupProfile.addEventListener("mousedown", (event) => {
+//   if (event.target.classList.contains("popupProfile"));
+//   closePopup();
+// });
 
 
-checkFormValidity(cardForm, cardSubmitButton)
+
+
+
+popupProfile.addEventListener('mousedown', (event) => {
+  if (event.target === popupProfile) {
+    // evt.preventDefault();
+    closePopup(popupProfile, popupCardConteiner);
+  }
+});
