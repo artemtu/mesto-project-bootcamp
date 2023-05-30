@@ -171,8 +171,6 @@ function addCardToPage(name, link) {
 
 // валидация//
 
-
-
 function showError(input) {
   const spanId = `error-${input.id}`;
   const errorField = document.getElementById(spanId);
@@ -193,9 +191,39 @@ function checkValid(input) {
   }
 }
 
+const profileForm = document.forms.profile__edit;
+const cardForm = document.forms.card__edit;
+
+function checkFormValidity(someForm, submitButton) {
+  if (someForm.checkValidity()) {
+    enableButton(submitButton);
+  } else {
+    disableButton(submitButton);
+  }
+}
+
+function enableButton(submitButton) {
+  submitButton.disabled = false;
+}
+
+function disableButton(submitButton) {
+  submitButton.disabled = true;
+}
+
 const inputList = document.querySelectorAll(".popup__inputs-text");
+const profileSubmitButton = document.getElementById("profile-submit");
+const cardSubmitButton = document.getElementById("card-submit");
+
 
 inputList.forEach((input) => {
-  input.addEventListener("input", () => checkValid(input));
+  input.addEventListener("input", () => {
+    checkValid(input);
+    checkFormValidity(profileForm, profileSubmitButton);
+    checkFormValidity(cardForm, cardSubmitButton);
+
+  });
 });
 
+
+checkFormValidity(profileForm, profileSubmitButton)
+checkFormValidity(cardForm, cardSubmitButton)
