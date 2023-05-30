@@ -244,12 +244,13 @@ closePopupOverlay(popupProfile, popupProfileContainer);
 closePopupOverlay(popupCardAdd, popupCardContainer);
 closePopupOverlay(popupSectionImage, popupImageContainer);
 
-// popupLists.forEach((popup) => {
-//   popup.addEventListener("mousedown", (evt) => {
-//     if(evt.target === popup){
-//       closePopup(popupProfile,popupProfileContainer)
-//       closePopup(popupCardAdd,popupCardConteiner)
-//       closePopup(popupSectionImage,popupImageContainer)
-//     }
-//   });
-// });
+function closePopupEsc(popupSection, popupContainer) {
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closePopup(popupSection, popupContainer);
+    }
+  });
+}
+closePopupEsc(popupProfile, popupProfileContainer);
+closePopupEsc(popupCardAdd, popupCardContainer);
+closePopupEsc(popupSectionImage, popupImageContainer);
