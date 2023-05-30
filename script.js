@@ -242,13 +242,8 @@ checkFormValidity(cardForm, cardSubmitButton);
 //   closePopup();
 // });
 
-
-
-
-
-popupProfile.addEventListener('mousedown', (event) => {
+popupProfile.addEventListener("mousedown", (event) => {
   if (event.target === popupProfile) {
-    // evt.preventDefault();
-    closePopup(popupProfile, popupCardConteiner);
+    closePopup(popupProfile, popupProfileContainer);
   }
 });
