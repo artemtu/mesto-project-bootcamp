@@ -17,44 +17,42 @@ const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
 
 // попап добавление карточки
-const popupCardAdd = document.querySelector(".popup_add");
-const popupCardContainer = document.querySelector(".popup__container_add");
-const popupCardButton = document.querySelector(".profile__add-button");
-const popupCloseCard = document.querySelector(".popup-close-card");
-const popupCardForm = document.querySelector(".popup__card-form");
-const placeNameInput = document.getElementById("popup__inputs_place_name");
-const linkInput = document.getElementById("popup__inputs_place_link");
+// скопировал
 
 // попап открытия изображения
 const popupSectionImage = document.querySelector(".popup-image");
 const popupImageContainer = document.querySelector(".popup__container_image");
 const popupImage = popupImageContainer.querySelector(".popup__image");
 const popupImageTitle = document.querySelector(".popup__title");
-const popupCloseImage = document.querySelector(".popup-close-image");
+export const popupCloseImage = document.querySelector(".popup-close-image");
 
 //==============================================================================//
 
 // элементы для создания карточек
 
 const template = document.getElementById("cards");
-const cardTemplate = template.content.querySelector(".element");
+export const elementsContainer = document.querySelector(".elements");
+export const cardTemplate = template.content.querySelector(".element");
 const cardImage = cardTemplate.querySelector(".element__image");
 const cardTitle = cardTemplate.querySelector(".element__title");
-const elementsContainer = document.querySelector(".elements");
+
+
 
 //==============================================================================//
 import {enableButton} from './validation.js';
+
+import {openPopup} from './modal.js';
+import {closePopup} from './modal.js';
+import {popupCardButton} from '../components/card.js';
+import { popupCloseCard } from '../components/card.js';
+import { popupCardForm } from '../components/card.js';
+
+import { popupCardAdd } from '../components/card.js';
+import { popupCardContainer } from '../components/card.js';
+
 //
 
-function openPopup(popup, popupContainer) {
-  popup.classList.add("popup__container_active");
-  popupContainer.classList.add("popup__container_active");
-}
 
-function closePopup(popup, popupContainer) {
-  popup.classList.remove("popup__container_active");
-  popupContainer.classList.remove("popup__container_active");
-}
 
 //== PROFILE//
 popupEditProfileButton.addEventListener("click", () => {
@@ -97,6 +95,13 @@ function handleFormSubmitCard(evt) {
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
+// добавление карточки //
+import { placeNameInput } from '../components/card.js';
+import { linkInput } from '../components/card.js';
+import {createCard} from '../components/card.js';
+import {addCardToPage} from '../components/card.js';
+
+
 const initialCards = [
   {
     name: "Архыз",
@@ -124,39 +129,6 @@ const initialCards = [
   },
 ];
 
-function createCard(name, link) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".element__image");
-  const textTitle = cardElement.querySelector(".element__title");
-  const likeButton = cardElement.querySelector(".element__like");
-  const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
-
-  textTitle.textContent = name;
-  cardImage.src = link;
-  cardImage.alt = name;
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__liked");
-  });
-
-  buttonDeleteCard.addEventListener("click", () => {
-    cardElement.remove();
-  });
-  cardImage.addEventListener("click", () => {
-    const imageUrl = cardImage.getAttribute("src");
-    const imageAlt = cardImage.getAttribute("alt");
-    popupImage.setAttribute("src", imageUrl);
-    popupImage.setAttribute("alt", imageAlt);
-    popupImageTitle.textContent = imageAlt;
-    openPopup(popupSectionImage, popupImageContainer);
-  });
-  popupCloseImage.addEventListener("click", () => {
-    closePopup(popupSectionImage, popupImageContainer);
-  });
-
-  return cardElement;
-}
-
 initialCards.forEach((card) => {
   const name = card.name;
   const link = card.link;
@@ -164,10 +136,6 @@ initialCards.forEach((card) => {
   elementsContainer.append(createdCard);
 });
 
-function addCardToPage(name, link) {
-  const createdCard = createCard(name, link);
-  elementsContainer.prepend(createdCard);
-}
 
 // ==================================================//
 
@@ -189,29 +157,19 @@ enableValidation(validitySettings)
 
 // закрытие попапа - клик overlay и esc//
 
-const popupLists = document.querySelectorAll(".popup");
+import {closePopupOverlay} from './modal.js';
+import {closePopupEsc} from './modal.js';
 
-function closePopupOverlay(popupSection, popupContainer) {
-  popupLists.forEach((popup) => {
-    popup.addEventListener("mousedown", (evt) => {
-      if (evt.target === popup) {
-        closePopup(popupSection, popupContainer);
-      }
-    });
-  });
-}
+export const popupLists = document.querySelectorAll(".popup");
+
+
 
 closePopupOverlay(popupProfile, popupProfileContainer);
 closePopupOverlay(popupCardAdd, popupCardContainer);
 closePopupOverlay(popupSectionImage, popupImageContainer);
 
-function closePopupEsc(popupSection, popupContainer) {
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      closePopup(popupSection, popupContainer);
-    }
-  });
-}
+
 closePopupEsc(popupProfile, popupProfileContainer);
 closePopupEsc(popupCardAdd, popupCardContainer);
 closePopupEsc(popupSectionImage, popupImageContainer);
+
