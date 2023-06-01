@@ -1,5 +1,3 @@
-
-
 // попап Профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupProfileContainer = popupProfile.querySelector(
@@ -15,8 +13,6 @@ const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
-
-
 
 // попап открытия изображения
 const popupSectionImage = document.querySelector(".popup-image");
@@ -34,24 +30,19 @@ export const elementsContainer = document.querySelector(".elements");
 export const cardTemplate = template.content.querySelector(".element");
 const cardImage = cardTemplate.querySelector(".element__image");
 const cardTitle = cardTemplate.querySelector(".element__title");
-
-
+const cardSaveButton = document.querySelector("#card-submit");
 
 //==============================================================================//
-import {enableButton} from './validation.js';
+import { enableButton, disableButton } from "./validation.js";
 
-import {openPopup} from './modal.js';
-import {closePopup} from './modal.js';
-import {popupCardButton} from '../components/card.js';
-import { popupCloseCard } from '../components/card.js';
-import { popupCardForm } from '../components/card.js';
+import { openPopup } from "./modal.js";
+import { closePopup } from "./modal.js";
+import { popupCardButton } from "../components/card.js";
+import { popupCloseCard } from "../components/card.js";
+import { popupCardForm } from "../components/card.js";
 
-import { popupCardAdd } from '../components/card.js';
-import { popupCardContainer } from '../components/card.js';
-
-
-
-
+import { popupCardAdd } from "../components/card.js";
+import { popupCardContainer } from "../components/card.js";
 
 //== PROFILE//
 popupEditProfileButton.addEventListener("click", () => {
@@ -78,6 +69,7 @@ popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
 popupCardButton.addEventListener("click", () => {
   openPopup(popupCardAdd, popupCardContainer);
+  disableButton(cardSaveButton);
 });
 
 popupCloseCard.addEventListener("click", () => {
@@ -90,16 +82,17 @@ function handleFormSubmitCard(evt) {
   const link = linkInput.value;
   addCardToPage(name, link);
   closePopup(popupCardAdd, popupCardContainer);
+  placeNameInput.value = "";
+  linkInput.value = "";
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // добавление карточки //
-import { placeNameInput } from '../components/card.js';
-import { linkInput } from '../components/card.js';
-import {createCard} from '../components/card.js';
-import {addCardToPage} from '../components/card.js';
-
+import { placeNameInput } from "../components/card.js";
+import { linkInput } from "../components/card.js";
+import { createCard } from "../components/card.js";
+import { addCardToPage } from "../components/card.js";
 
 const initialCards = [
   {
@@ -135,41 +128,34 @@ initialCards.forEach((card) => {
   elementsContainer.append(createdCard);
 });
 
-
 // ==================================================//
 
 // валидация//
 
-import {enableValidation} from './validation.js';
-
+import { enableValidation } from "./validation.js";
 
 const validitySettings = {
   formSelector: ".popup__profile-form",
   inputSelector: ".popup__inputs-text",
   buttonSelector: ".popup__button",
-  inputErrorClass: "popup__inputs-text_invalid"
+  inputErrorClass: "popup__inputs-text_invalid",
 };
 
-
-enableValidation(validitySettings)
+enableValidation(validitySettings);
 
 //==============================================//
 
 // закрытие попапа - клик overlay и esc//
 
-import {closePopupOverlay} from './modal.js';
-import {closePopupEsc} from './modal.js';
+import { closePopupOverlay } from "./modal.js";
+import { closePopupEsc } from "./modal.js";
 
 export const popupLists = document.querySelectorAll(".popup");
-
-
 
 closePopupOverlay(popupProfile, popupProfileContainer);
 closePopupOverlay(popupCardAdd, popupCardContainer);
 closePopupOverlay(popupSectionImage, popupImageContainer);
 
-
 closePopupEsc(popupProfile, popupProfileContainer);
 closePopupEsc(popupCardAdd, popupCardContainer);
 closePopupEsc(popupSectionImage, popupImageContainer);
-

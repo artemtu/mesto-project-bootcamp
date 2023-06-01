@@ -32,7 +32,7 @@ export function enableButton(submitButton) {
   submitButton.disabled = false;
 }
 
-function disableButton(submitButton) {
+export function disableButton(submitButton) {
   submitButton.disabled = true;
 }
 
