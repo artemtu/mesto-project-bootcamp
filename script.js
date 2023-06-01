@@ -14,7 +14,7 @@ const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-const profileSaveButton  = document.querySelector('.popup__button')
+const profileSaveButton = document.querySelector(".popup__button");
 
 // попап добавление карточки
 const popupCardAdd = document.querySelector(".popup_add");
@@ -43,8 +43,7 @@ const cardTitle = cardTemplate.querySelector(".element__title");
 const elementsContainer = document.querySelector(".elements");
 
 //==============================================================================//
-
-
+import {enableButton} from './validation.js';
 //
 
 function openPopup(popup, popupContainer) {
@@ -62,7 +61,7 @@ popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
   openPopup(popupProfile, popupProfileContainer);
-  enableButton(profileSaveButton)
+  enableButton(profileSaveButton);
 });
 
 popupCloseProfile.addEventListener("click", () => {
@@ -174,62 +173,17 @@ function addCardToPage(name, link) {
 
 // валидация//
 
-function showError(input, form) {
-  const spanId = `error-${input.id}`;
-  const errorField = form.querySelector(`#${spanId}`);
-  errorField.textContent = input.validationMessage;
-}
-
-function hideError(input, form) {
-  const spanId = `error-${input.id}`;
-  const errorField = form.querySelector(`#${spanId}`);
-  errorField.textContent = "";
-}
-
-function checkValid(input, form) {
-  if (input.validity.valid) {
-    hideError(input, form);
-  } else {
-    showError(input, form);
-  }
-}
-
-function checkFormValidity(form,submitButton) {
-  if (form.checkValidity()) {
-    enableButton(submitButton);
-  } else {
-    disableButton(submitButton);
-  }
-}
-
-function enableButton(submitButton) {
-  submitButton.disabled = false;
-}
-
-function disableButton(submitButton) {
-  submitButton.disabled = true;
-}
+import {enableValidation} from './validation.js';
 
 
-
-function setEventListeners(form) {
-  const inputList = form.querySelectorAll(".popup__inputs-text");
-  const submitButton = form.querySelector('.popup__button');
-  checkFormValidity(form, submitButton);
-  inputList.forEach((input) => {
-    input.addEventListener("input", () => {
-      checkValid(input, form);
-      checkFormValidity(form, submitButton);
-    });
-  });
-}
+const validitySettings = {
+  formSelector: ".popup__profile-form",
+  inputSelector: ".popup__inputs-text",
+  buttonSelector: ".popup__button",
+};
 
 
-const formList = document.querySelectorAll(".popup__profile-form");
-formList.forEach((form) => {
-  setEventListeners(form);
-});
-
+enableValidation(validitySettings)
 
 //==============================================//
 
