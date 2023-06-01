@@ -1,4 +1,4 @@
-// попапы
+
 
 // попап Профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -16,8 +16,7 @@ const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
 
-// попап добавление карточки
-// скопировал
+
 
 // попап открытия изображения
 const popupSectionImage = document.querySelector(".popup-image");
@@ -50,7 +49,7 @@ import { popupCardForm } from '../components/card.js';
 import { popupCardAdd } from '../components/card.js';
 import { popupCardContainer } from '../components/card.js';
 
-//
+
 
 
 
