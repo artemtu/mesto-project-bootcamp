@@ -1,20 +1,22 @@
-function showError(input, form) {
+function showError(input, form, settings) {
   const spanId = `error-${input.id}`;
   const errorField = form.querySelector(`#${spanId}`);
+  input.classList.add(settings.inputErrorClass);
   errorField.textContent = input.validationMessage;
 }
 
-function hideError(input, form) {
+function hideError(input, form, settings) {
   const spanId = `error-${input.id}`;
   const errorField = form.querySelector(`#${spanId}`);
+  input.classList.remove(settings.inputErrorClass);
   errorField.textContent = "";
 }
 
-function checkValid(input, form) {
+function checkValid(input, form, settings) {
   if (input.validity.valid) {
-    hideError(input, form);
+    hideError(input, form, settings);
   } else {
-    showError(input, form);
+    showError(input, form, settings);
   }
 }
 
@@ -40,7 +42,7 @@ function setEventListeners(form, settings) {
   checkFormValidity(form, submitButton);
   inputList.forEach((input) => {
     input.addEventListener("input", () => {
-      checkValid(input, form);
+      checkValid(input, form, settings);
       checkFormValidity(form, submitButton);
     });
   });

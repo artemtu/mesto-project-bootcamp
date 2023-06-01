@@ -147,6 +147,7 @@ const validitySettings = {
   formSelector: ".popup__profile-form",
   inputSelector: ".popup__inputs-text",
   buttonSelector: ".popup__button",
+  inputErrorClass: "popup__inputs-text_invalid"
 };
 
 
