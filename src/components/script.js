@@ -1,3 +1,4 @@
+import '../../src/pages/index.css'
 import { enableButton, disableButton, enableValidation } from "../components/validation.js";
 import {
   openPopup,
