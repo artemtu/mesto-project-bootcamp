@@ -1,4 +1,24 @@
-// попап Профиль
+import { enableButton, disableButton, enableValidation } from "./validation.js";
+import {
+  openPopup,
+  closePopup,
+  closePopupOverlay,
+  closePopupEsc,
+} from "./modal.js";
+import {
+  popupCardButton,
+  popupCloseCard,
+  popupCardForm,
+  popupCardAdd,
+  popupCardContainer,
+  placeNameInput,
+  clickOnCard,
+  linkInput,
+  createCard,
+  addCardToPage,
+} from "../components/card.js";
+
+// попап профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupProfileContainer = popupProfile.querySelector(
   ".popup__container_profile"
@@ -15,13 +35,13 @@ const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
 
 // попап открытия изображения
-const popupSectionImage = document.querySelector(".popup-image");
-const popupImageContainer = document.querySelector(".popup__container_image");
-const popupImage = popupImageContainer.querySelector(".popup__image");
-const popupImageTitle = document.querySelector(".popup__title");
+export const popupSectionImage = document.querySelector(".popup-image");
+export const popupImageContainer = document.querySelector(
+  ".popup__container_image"
+);
+export const popupImage = popupImageContainer.querySelector(".popup__image");
+export const popupImageTitle = document.querySelector(".popup__title");
 export const popupCloseImage = document.querySelector(".popup-close-image");
-
-//==============================================================================//
 
 // элементы для создания карточек
 
@@ -33,18 +53,8 @@ const cardTitle = cardTemplate.querySelector(".element__title");
 const cardSaveButton = document.querySelector("#card-submit");
 
 //==============================================================================//
-import { enableButton, disableButton } from "./validation.js";
 
-import { openPopup } from "./modal.js";
-import { closePopup } from "./modal.js";
-import { popupCardButton } from "../components/card.js";
-import { popupCloseCard } from "../components/card.js";
-import { popupCardForm } from "../components/card.js";
-
-import { popupCardAdd } from "../components/card.js";
-import { popupCardContainer } from "../components/card.js";
-
-//== PROFILE//
+//== операции с профилем//
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
@@ -66,6 +76,7 @@ function handleFormSubmitProfile(evt) {
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
 //=====================================================//
+// операции с попапом карточек
 
 popupCardButton.addEventListener("click", () => {
   openPopup(popupCardAdd, popupCardContainer);
@@ -88,11 +99,14 @@ function handleFormSubmitCard(evt) {
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
-// добавление карточки //
-import { placeNameInput } from "../components/card.js";
-import { linkInput } from "../components/card.js";
-import { createCard } from "../components/card.js";
-import { addCardToPage } from "../components/card.js";
+// открытие карточек (попап)
+
+const allCards = document.querySelectorAll(".element__image");
+
+clickOnCard(allCards);
+// ==================================================//
+
+// добавление карточек //
 
 const initialCards = [
   {
@@ -132,8 +146,6 @@ initialCards.forEach((card) => {
 
 // валидация//
 
-import { enableValidation } from "./validation.js";
-
 const validitySettings = {
   formSelector: ".popup__profile-form",
   inputSelector: ".popup__inputs-text",
@@ -146,9 +158,6 @@ enableValidation(validitySettings);
 //==============================================//
 
 // закрытие попапа - клик overlay и esc//
-
-import { closePopupOverlay } from "./modal.js";
-import { closePopupEsc } from "./modal.js";
 
 export const popupLists = document.querySelectorAll(".popup");
 

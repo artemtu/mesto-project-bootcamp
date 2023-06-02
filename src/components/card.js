@@ -1,47 +1,25 @@
+import {
+  elementsContainer,
+  cardTemplate,
+  popupCloseImage,
+  popupSectionImage,
+  popupImageContainer,
+  popupImage,
+  popupImageTitle,
+} from "./script.js";
+import { openPopup, closePopup } from "./modal.js";
+
 export const popupCardAdd = document.querySelector(".popup_add");
-export const popupCardContainer = document.querySelector(".popup__container_add");
+export const popupCardContainer = document.querySelector(
+  ".popup__container_add"
+);
 export const popupCardButton = document.querySelector(".profile__add-button");
 export const popupCloseCard = document.querySelector(".popup-close-card");
 export const popupCardForm = document.querySelector(".popup__card-form");
-export const placeNameInput = document.getElementById("popup__inputs_place_name");
+export const placeNameInput = document.getElementById(
+  "popup__inputs_place_name"
+);
 export const linkInput = document.getElementById("popup__inputs_place_link");
-
-import { cardTemplate } from "./script.js";
-import { popupCloseImage } from "./script.js";
-import { openPopup } from "./modal.js";
-import { closePopup } from "./modal.js";
-import { elementsContainer } from "./script.js";
-
-
-
-
-
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 export function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -76,10 +54,25 @@ export function createCard(name, link) {
   return cardElement;
 }
 
-
-
-
 export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
+}
+
+export function clickOnCard(cards) {
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const imageUrl = card.getAttribute("src");
+      const imageAlt = card.getAttribute("alt");
+      popupImage.setAttribute("src", imageUrl);
+      popupImage.setAttribute("alt", imageAlt);
+      popupImageTitle.textContent = card.alt;
+      popupSectionImage.classList.add("popup__container_active");
+      popupImageContainer.classList.add("popup__container_active");
+    });
+    popupCloseImage.addEventListener("click", () => {
+      popupSectionImage.classList.remove("popup__container_active");
+      popupImageContainer.classList.remove("popup__container_active");
+    });
+  });
 }
