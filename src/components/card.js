@@ -6,8 +6,8 @@ import {
   popupImageContainer,
   popupImage,
   popupImageTitle,
-} from "./script.js";
-import { openPopup, closePopup } from "./modal.js";
+} from "../components/script.js";
+import { openPopup, closePopup } from "../components/modal.js";
 
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(

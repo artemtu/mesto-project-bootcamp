@@ -1,10 +1,10 @@
-import { enableButton, disableButton, enableValidation } from "./validation.js";
+import { enableButton, disableButton, enableValidation } from "../components/validation.js";
 import {
   openPopup,
   closePopup,
   closePopupOverlay,
   closePopupEsc,
-} from "./modal.js";
+} from "../components/modal.js";
 import {
   popupCardButton,
   popupCloseCard,

@@ -1,4 +1,4 @@
-import { popupLists } from "./script.js";
+import { popupLists } from "../components/script.js";
 
 export function openPopup(popup, popupContainer) {
   popup.classList.add("popup__container_active");
