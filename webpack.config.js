@@ -16,7 +16,7 @@ module.exports = {
       directory: path.resolve(__dirname, "dist"),
     },
     compress: true,
-    port: 8080,
+    port: 8081,
     open: true,
   },
   module: {
@@ -51,9 +51,6 @@ module.exports = {
       template: "./index.html",
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: "css/[name].css",
-      chunkFilename: "css/[id].css",
-    }),
+    new MiniCssExtractPlugin(),
   ],
 };
