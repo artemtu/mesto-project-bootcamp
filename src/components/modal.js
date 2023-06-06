@@ -2,7 +2,7 @@ import { popupLists } from "../components/script.js";
 
 export function openPopup(popup, popupContainer) {
   popup.classList.add("popup__container_active");
-  popupContainer.classList.add("popup__container_active");
+
 }
 
 export function closePopup(popup, popupContainer) {
