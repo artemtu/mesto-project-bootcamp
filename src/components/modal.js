@@ -5,16 +5,15 @@ export function openPopup(popup, popupContainer) {
 
 }
 
-export function closePopup(popup, popupContainer) {
+export function closePopup(popup) {
   popup.classList.remove("popup__container_active");
-  popupContainer.classList.remove("popup__container_active");
 }
 
-export function closePopupOverlay(popupSection, popupContainer) {
+export function closePopupOverlay(popupSection) {
   popupLists.forEach((popup) => {
     popup.addEventListener("mousedown", (evt) => {
       if (evt.target === popup) {
-        closePopup(popupSection, popupContainer);
+        closePopup(popupSection);
       }
     });
   });
