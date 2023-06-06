@@ -45,10 +45,10 @@ export function createCard(name, link) {
     popupImage.setAttribute("src", imageUrl);
     popupImage.setAttribute("alt", imageAlt);
     popupImageTitle.textContent = imageAlt;
-    openPopup(popupSectionImage, popupImageContainer);
+    openPopup(popupSectionImage);
   });
   popupCloseImage.addEventListener("click", () => {
-    closePopup(popupSectionImage, popupImageContainer);
+    closePopup(popupSectionImage);
   });
 
   return cardElement;
@@ -68,11 +68,9 @@ export function clickOnCard(cards) {
       popupImage.setAttribute("alt", imageAlt);
       popupImageTitle.textContent = card.alt;
       popupSectionImage.classList.add("popup__container_active");
-      popupImageContainer.classList.add("popup__container_active");
     });
     popupCloseImage.addEventListener("click", () => {
       popupSectionImage.classList.remove("popup__container_active");
-      popupImageContainer.classList.remove("popup__container_active");
     });
   });
 }

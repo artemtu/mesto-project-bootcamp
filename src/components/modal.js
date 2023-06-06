@@ -19,10 +19,10 @@ export function closePopupOverlay(popupSection) {
   });
 }
 
-export function closePopupEsc(popupSection, popupContainer) {
+export function closePopupEsc(popupSection) {
   document.addEventListener("keydown", (evt) => {
     if (evt.key === "Escape") {
-      closePopup(popupSection, popupContainer);
+      closePopup(popupSection);
     }
   });
 }

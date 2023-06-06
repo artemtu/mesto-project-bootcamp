@@ -59,19 +59,19 @@ const cardSaveButton = document.querySelector("#card-submit");
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
-  openPopup(popupProfile, popupProfileContainer);
+  openPopup(popupProfile);
   enableButton(profileSaveButton);
 });
 
 popupCloseProfile.addEventListener("click", () => {
-  closePopup(popupProfile, popupProfileContainer);
+  closePopup(popupProfile);
 });
 
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
-  closePopup(popupProfile, popupProfileContainer);
+  closePopup(popupProfile);
 }
 
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
@@ -85,7 +85,7 @@ popupCardButton.addEventListener("click", () => {
 });
 
 popupCloseCard.addEventListener("click", () => {
-  closePopup(popupCardAdd, popupCardContainer);
+  closePopup(popupCardAdd);
 });
 
 function handleFormSubmitCard(evt) {
@@ -93,7 +93,7 @@ function handleFormSubmitCard(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
   addCardToPage(name, link);
-  closePopup(popupCardAdd, popupCardContainer);
+  closePopup(popupCardAdd);
   placeNameInput.value = "";
   linkInput.value = "";
 }
@@ -162,10 +162,10 @@ enableValidation(validitySettings);
 
 export const popupLists = document.querySelectorAll(".popup");
 
-closePopupOverlay(popupProfile, popupProfileContainer);
-closePopupOverlay(popupCardAdd, popupCardContainer);
-closePopupOverlay(popupSectionImage, popupImageContainer);
+closePopupOverlay(popupProfile);
+closePopupOverlay(popupCardAdd);
+closePopupOverlay(popupSectionImage);
 
-closePopupEsc(popupProfile, popupProfileContainer);
-closePopupEsc(popupCardAdd, popupCardContainer);
-closePopupEsc(popupSectionImage, popupImageContainer);
+closePopupEsc(popupProfile);
+closePopupEsc(popupCardAdd);
+closePopupEsc(popupSectionImage);
