@@ -47,10 +47,6 @@ export function createCard(name, link) {
     popupImageTitle.textContent = imageAlt;
     openPopup(popupSectionImage);
   });
-  popupCloseImage.addEventListener("click", () => {
-    closePopup(popupSectionImage);
-  });
-
   return cardElement;
 }
 

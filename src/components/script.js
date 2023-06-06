@@ -1,5 +1,9 @@
 // import '../../src/pages/index.css'
-import { enableButton, disableButton, enableValidation } from "../components/validation.js";
+import {
+  enableButton,
+  disableButton,
+  enableValidation,
+} from "../components/validation.js";
 import {
   openPopup,
   closePopup,
@@ -101,6 +105,10 @@ function handleFormSubmitCard(evt) {
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // открытие карточек (попап)
+
+popupCloseImage.addEventListener("click", () => {
+  closePopup(popupSectionImage);
+});
 
 const allCards = document.querySelectorAll(".element__image");
 
