@@ -11,12 +11,10 @@ import {
 } from "../components/modal.js";
 import {
   popupCardButton,
-  popupCloseCard,
   popupCardForm,
   popupCardAdd,
   popupCardContainer,
   placeNameInput,
-  clickOnCard,
   linkInput,
   createCard,
   addCardToPage,
@@ -24,13 +22,7 @@ import {
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
-const popupProfileContainer = popupProfile.querySelector(
-  ".popup__container_profile"
-);
 const popupEditProfileButton = document.querySelector(".profile__edit");
-const popupCloseProfile = popupProfileContainer.querySelector(
-  ".popup-close-profile"
-);
 const popupProfileForm = document.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
@@ -52,8 +44,6 @@ export const popupCloseImage = document.querySelector(".popup-close-image");
 const template = document.getElementById("cards");
 export const elementsContainer = document.querySelector(".elements");
 export const cardTemplate = template.content.querySelector(".element");
-const cardImage = cardTemplate.querySelector(".element__image");
-const cardTitle = cardTemplate.querySelector(".element__title");
 const cardSaveButton = document.querySelector("#card-submit");
 
 // все кнопки закрытия карточек
@@ -75,7 +65,6 @@ popupEditProfileButton.addEventListener("click", () => {
   enableButton(profileSaveButton);
 });
 
-
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
@@ -93,7 +82,6 @@ popupCardButton.addEventListener("click", () => {
   disableButton(cardSaveButton);
 });
 
-
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
   const name = placeNameInput.value;
@@ -108,11 +96,6 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // открытие карточек (попап)
 
-
-
-const allCards = document.querySelectorAll(".element__image");
-
-clickOnCard(allCards);
 // ==================================================//
 
 // добавление карточек //
@@ -173,7 +156,3 @@ export const popupLists = document.querySelectorAll(".popup");
 closePopupOverlay(popupProfile);
 closePopupOverlay(popupCardAdd);
 closePopupOverlay(popupSectionImage);
-
-// closePopupEsc(popupProfile);
-// closePopupEsc(popupCardAdd);
-// closePopupEsc(popupSectionImage);

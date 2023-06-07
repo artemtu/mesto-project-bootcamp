@@ -1,9 +1,7 @@
 import {
   elementsContainer,
   cardTemplate,
-  popupCloseImage,
   popupSectionImage,
-  popupImageContainer,
   popupImage,
   popupImageTitle,
 } from "../components/script.js";
@@ -55,15 +53,3 @@ export function addCardToPage(name, link) {
   elementsContainer.prepend(createdCard);
 }
 
-export function clickOnCard(cards) {
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const imageUrl = card.getAttribute("src");
-      const imageAlt = card.getAttribute("alt");
-      popupImage.setAttribute("src", imageUrl);
-      popupImage.setAttribute("alt", imageAlt);
-      popupImageTitle.textContent = card.alt;
-      popupSectionImage.classList.add("popup__container_active");
-    });
-  });
-}
