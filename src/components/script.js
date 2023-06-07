@@ -7,7 +7,7 @@ import {
 import {
   openPopup,
   closePopup,
-  closePopupOverlay,
+  // closePopupOverlay,
 } from "../components/modal.js";
 import {
   popupCardButton,
@@ -46,7 +46,8 @@ export const elementsContainer = document.querySelector(".elements");
 export const cardTemplate = template.content.querySelector(".element");
 const cardSaveButton = document.querySelector("#card-submit");
 
-// все кнопки закрытия карточек
+//==============================================================================//
+
 const closeButtons = document.querySelectorAll(".popup__close-icon");
 
 //==============================================================================//
@@ -153,6 +154,6 @@ enableValidation(validitySettings);
 
 export const popupLists = document.querySelectorAll(".popup");
 
-closePopupOverlay(popupProfile);
-closePopupOverlay(popupCardAdd);
-closePopupOverlay(popupSectionImage);
+// closePopupOverlay(popupProfile);
+// closePopupOverlay(popupCardAdd);
+// closePopupOverlay(popupSectionImage);

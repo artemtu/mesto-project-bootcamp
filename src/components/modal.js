@@ -1,4 +1,4 @@
-import { popupLists } from "../components/script.js";
+const popups = document.querySelectorAll(".popup");
 
 export function openPopup(popup) {
   popup.classList.add("popup__container_active");
@@ -10,19 +10,18 @@ export function closePopup(popup) {
   document.removeEventListener("keydown", closePopupByEscape);
 }
 
-export function closePopupOverlay(popupSection) {
-  popupLists.forEach((popup) => {
-    popup.addEventListener("mousedown", (evt) => {
-      if (evt.target === popup) {
-        closePopup(popupSection);
-      }
-    });
-  });
-}
-
 function closePopupByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup__container_active");
     closePopup(openedPopup);
   }
 }
+
+// close popups when click overlay
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup__container_active")) {
+      closePopup(popup);
+    }
+  });
+});
