@@ -65,8 +65,5 @@ export function clickOnCard(cards) {
       popupImageTitle.textContent = card.alt;
       popupSectionImage.classList.add("popup__container_active");
     });
-    popupCloseImage.addEventListener("click", () => {
-      popupSectionImage.classList.remove("popup__container_active");
-    });
   });
 }
