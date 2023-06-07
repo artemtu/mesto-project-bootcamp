@@ -56,7 +56,16 @@ const cardImage = cardTemplate.querySelector(".element__image");
 const cardTitle = cardTemplate.querySelector(".element__title");
 const cardSaveButton = document.querySelector("#card-submit");
 
+// все кнопки закрытия карточек
+const closeButtons = document.querySelectorAll(".popup__close-icon");
+
 //==============================================================================//
+
+// закрытие всех попапов по кнопке
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
 
 //== операции с профилем//
 popupEditProfileButton.addEventListener("click", () => {
@@ -66,9 +75,6 @@ popupEditProfileButton.addEventListener("click", () => {
   enableButton(profileSaveButton);
 });
 
-popupCloseProfile.addEventListener("click", () => {
-  closePopup(popupProfile);
-});
 
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -87,9 +93,6 @@ popupCardButton.addEventListener("click", () => {
   disableButton(cardSaveButton);
 });
 
-popupCloseCard.addEventListener("click", () => {
-  closePopup(popupCardAdd);
-});
 
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
@@ -105,9 +108,7 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // открытие карточек (попап)
 
-popupCloseImage.addEventListener("click", () => {
-  closePopup(popupSectionImage);
-});
+
 
 const allCards = document.querySelectorAll(".element__image");
 
