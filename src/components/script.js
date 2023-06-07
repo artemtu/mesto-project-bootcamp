@@ -8,7 +8,6 @@ import {
   openPopup,
   closePopup,
   closePopupOverlay,
-  closePopupEsc,
 } from "../components/modal.js";
 import {
   popupCardButton,
@@ -174,6 +173,6 @@ closePopupOverlay(popupProfile);
 closePopupOverlay(popupCardAdd);
 closePopupOverlay(popupSectionImage);
 
-closePopupEsc(popupProfile);
-closePopupEsc(popupCardAdd);
-closePopupEsc(popupSectionImage);
+// closePopupEsc(popupProfile);
+// closePopupEsc(popupCardAdd);
+// closePopupEsc(popupSectionImage);
