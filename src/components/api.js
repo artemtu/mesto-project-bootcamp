@@ -32,3 +32,22 @@ export function getInfoProfile() {
       console.error(error);
     });
 }
+
+export function getCards() {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      return data
+      // console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+// getCards()

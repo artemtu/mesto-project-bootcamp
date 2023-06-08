@@ -20,7 +20,7 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import { getInfoProfile } from "../components/api.js";
+import { getInfoProfile, getCards } from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -106,39 +106,17 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // добавление карточек //
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
-initialCards.forEach((card) => {
-  const name = card.name;
-  const link = card.link;
-  const createdCard = createCard(name, link);
-  elementsContainer.append(createdCard);
-});
+function publishedCards() {
+  getCards().then((data) => {
+    data.forEach((card) => {
+      const name = card.name;
+      const link = card.link;
+      const createdCard = createCard(name, link);
+      elementsContainer.append(createdCard);
+    });
+  });
+}
+publishedCards();
 
 // ==================================================//
 
@@ -159,10 +137,7 @@ enableValidation(validitySettings);
 
 export const popupLists = document.querySelectorAll(".popup");
 
-
-
 // БЛОК РАБОТ С СЕРВЕРОМ
-
 
 // получение данных профиля с сервера
 getInfoProfile();
