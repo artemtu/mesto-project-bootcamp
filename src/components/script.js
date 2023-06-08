@@ -20,6 +20,8 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
+import { getInfoProfile } from "../components/api.js";
+
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupEditProfileButton = document.querySelector(".profile__edit");
