@@ -5,7 +5,7 @@ import {
   popupImage,
   popupImageTitle,
 } from "../components/script.js";
-import { openPopup} from "../components/modal.js";
+import { openPopup } from "../components/modal.js";
 
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(
@@ -19,16 +19,18 @@ export const placeNameInput = document.getElementById(
 );
 export const linkInput = document.getElementById("popup__inputs_place_link");
 
-export function createCard(name, link) {
+export function createCard(name, link, like) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
   const textTitle = cardElement.querySelector(".element__title");
   const likeButton = cardElement.querySelector(".element__like");
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
+  const likesCount = cardElement.querySelector(".element__like-counter");
 
   textTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
+  likesCount.textContent = like
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("element__liked");
@@ -52,4 +54,3 @@ export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
-

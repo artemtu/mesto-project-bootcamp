@@ -118,7 +118,8 @@ function publishedCards() {
     data.forEach((card) => {
       const name = card.name;
       const link = card.link;
-      const createdCard = createCard(name, link);
+      const like = card.likes.length
+      const createdCard = createCard(name, link, like);
       elementsContainer.append(createdCard);
     });
   });
