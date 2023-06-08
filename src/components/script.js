@@ -25,6 +25,9 @@ import { getInfoProfile } from "../components/api.js";
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupEditProfileButton = document.querySelector(".profile__edit");
+export const profileAvatar = document.querySelector(".profile__avatar");
+export const profileBio = document.querySelector(".profile__bio");
+export const profileName = document.querySelector(".profile__author");
 const popupProfileForm = document.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
@@ -156,6 +159,10 @@ enableValidation(validitySettings);
 
 export const popupLists = document.querySelectorAll(".popup");
 
-// closePopupOverlay(popupProfile);
-// closePopupOverlay(popupCardAdd);
-// closePopupOverlay(popupSectionImage);
+
+
+// БЛОК РАБОТ С СЕРВЕРОМ
+
+
+// получение данных профиля с сервера
+getInfoProfile();

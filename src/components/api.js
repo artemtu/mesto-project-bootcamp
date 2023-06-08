@@ -1,5 +1,9 @@
-//'https://mesto.nomoreparties.co/v1/wbf-cohort-9/users/me', {
-// authorization: '5bef7bd0-1f3c-46db-9b6c-5d6391206dbb'
+import {
+  profileAvatar,
+  profileBio,
+  profileName,
+} from "../components/script.js";
+
 const config = {
   baseUrl: "https://mesto.nomoreparties.co/v1/wbf-cohort-9",
   headers: {
@@ -20,11 +24,11 @@ export function getInfoProfile() {
       }
     })
     .then((data) => {
-      console.log(data);
+      profileName.textContent = data.name;
+      profileBio.textContent = data.about;
+      profileAvatar.src = data.avatar;
     })
     .catch((error) => {
       console.error(error);
     });
 }
-
-getInfoProfile();
