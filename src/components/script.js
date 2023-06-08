@@ -20,7 +20,7 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import { getInfoProfile, getCards } from "../components/api.js";
+import { getInfoProfile, getCards, patchProfile, postCard } from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -34,6 +34,10 @@ const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
+
+
+
+
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -76,6 +80,7 @@ function handleFormSubmitProfile(evt) {
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
   closePopup(popupProfile);
+  patchProfile();
 }
 
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
@@ -93,9 +98,11 @@ function handleFormSubmitCard(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
   addCardToPage(name, link);
+  postCard()
   closePopup(popupCardAdd);
   placeNameInput.value = "";
   linkInput.value = "";
+
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
@@ -141,3 +148,7 @@ export const popupLists = document.querySelectorAll(".popup");
 
 // получение данных профиля с сервера
 getInfoProfile();
+
+
+
+

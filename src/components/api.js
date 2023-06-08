@@ -4,6 +4,8 @@ import {
   profileName,
 } from "../components/script.js";
 
+import { placeNameInput, linkInput } from "../components/card.js";
+
 const config = {
   baseUrl: "https://mesto.nomoreparties.co/v1/wbf-cohort-9",
   headers: {
@@ -33,32 +35,28 @@ export function getInfoProfile() {
     });
 }
 
-function patchProfile() {
+export function patchProfile() {
   return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      name: 'Пончик',
-      about: 'Маленький ягнёночек'
-    })
-  })
+      name: profileName.textContent,
+      about: profileBio.textContent,
+    }),
+  });
 }
 
-patchProfile()
-
-  fetch(`${config.baseUrl}/users/me`, {
-  headers: config.headers,
-})
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-  })
-  .then((data) => {
-    console.log(data);
-  });
-
-
+// fetch(`${config.baseUrl}/users/me`, {
+//   headers: config.headers,
+// })
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     }
+//   })
+//   .then((data) => {
+//     console.log(data);
+//   });
 
 // данные карточек
 export function getCards() {
@@ -71,7 +69,7 @@ export function getCards() {
       }
     })
     .then((data) => {
-      return data
+      return data;
       // console.log(data);
     })
     .catch((error) => {
@@ -79,5 +77,25 @@ export function getCards() {
     });
 }
 
+export function postCard() {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: "POST",
+    headers: config.headers,
+    body: JSON.stringify({
+      name: placeNameInput.value,
+      link: linkInput.value,
+    }),
+  });
+}
 
-
+// fetch(`${config.baseUrl}/cards`, {
+//   headers: config.headers,
+// })
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     }
+//   })
+//   .then((data) => {
+//     console.log(data);
+//   });
