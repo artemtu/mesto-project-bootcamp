@@ -33,6 +33,34 @@ export function getInfoProfile() {
     });
 }
 
+function patchProfile() {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: 'Пончик',
+      about: 'Маленький ягнёночек'
+    })
+  })
+}
+
+patchProfile()
+
+  fetch(`${config.baseUrl}/users/me`, {
+  headers: config.headers,
+})
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+  .then((data) => {
+    console.log(data);
+  });
+
+
+
+// данные карточек
 export function getCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
@@ -50,4 +78,6 @@ export function getCards() {
       console.error(error);
     });
 }
-// getCards()
+
+
+
