@@ -19,7 +19,7 @@ export const placeNameInput = document.getElementById(
 );
 export const linkInput = document.getElementById("popup__inputs_place_link");
 
-export function createCard(name, link, like) {
+export function createCard(name, link, like, myId, ownerId) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
   const textTitle = cardElement.querySelector(".element__title");
@@ -30,11 +30,17 @@ export function createCard(name, link, like) {
   textTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
-  likesCount.textContent = like
+  likesCount.textContent = like;
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("element__liked");
   });
+
+  if (ownerId !== myId) {
+    buttonDeleteCard.style.display = "none";
+  } else {
+    buttonDeleteCard.style.display = "flex";
+  }
 
   buttonDeleteCard.addEventListener("click", () => {
     cardElement.remove();

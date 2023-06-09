@@ -88,17 +88,28 @@ export function postCard() {
   });
 }
 
-// fetch(`${config.baseUrl}/cards`, {
-//   headers: config.headers,
-// })
-//   .then((response) => {
-//     if (response.ok) {
-//       return response.json();
-//     }
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   });
+export function getMyId() {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      return data._id;
+    });
+}
 
+import { publishedCards } from "../components/script.js";
 
+Promise.all([getInfoProfile(), getCards(), getMyId()])
+  .then(([cards]) => {
+    getInfoProfile();
+    publishedCards(cards);
 
+  })
+  .catch((err) => {
+    console.log(err);
+  });

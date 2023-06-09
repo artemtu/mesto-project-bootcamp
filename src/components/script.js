@@ -20,7 +20,12 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import { getInfoProfile, getCards, patchProfile, postCard } from "../components/api.js";
+import {
+  getInfoProfile,
+  getCards,
+  patchProfile,
+  postCard,
+} from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -34,10 +39,6 @@ const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
-
-
-
-
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -98,11 +99,10 @@ function handleFormSubmitCard(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
   addCardToPage(name, link);
-  postCard()
+  postCard();
   closePopup(popupCardAdd);
   placeNameInput.value = "";
   linkInput.value = "";
-
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
@@ -112,19 +112,29 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 // ==================================================//
 
 // добавление карточек //
+import { getMyId } from "../components/api.js";
+export function publishedCards() {
+  getMyId()
+    .then((myId) => {
+      getCards().then((data) => {
+        data.forEach((card) => {
+          const name = card.name;
+          const link = card.link;
+          const like = card.likes.length;
+          const ownerId = card.owner._id;
 
-function publishedCards() {
-  getCards().then((data) => {
-    data.forEach((card) => {
-      const name = card.name;
-      const link = card.link;
-      const like = card.likes.length
-      const createdCard = createCard(name, link, like);
-      elementsContainer.append(createdCard);
+          const createdCard = createCard(name, link, like, myId, ownerId);
+
+          elementsContainer.append(createdCard);
+        });
+      });
+    })
+    .catch((error) => {
+      console.error(error);
     });
-  });
 }
-publishedCards();
+
+// publishedCards()
 
 // ==================================================//
 
@@ -146,10 +156,4 @@ enableValidation(validitySettings);
 export const popupLists = document.querySelectorAll(".popup");
 
 // БЛОК РАБОТ С СЕРВЕРОМ
-
-// получение данных профиля с сервера
-getInfoProfile();
-
-
-
 
