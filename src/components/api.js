@@ -2,6 +2,7 @@ import {
   profileAvatar,
   profileBio,
   profileName,
+  publishedCards,
 } from "../components/script.js";
 
 import { placeNameInput, linkInput } from "../components/card.js";
@@ -102,14 +103,45 @@ export function getMyId() {
     });
 }
 
-import { publishedCards } from "../components/script.js";
-
 Promise.all([getInfoProfile(), getCards(), getMyId()])
   .then(([cards]) => {
     getInfoProfile();
+    getCards();
     publishedCards(cards);
-
   })
   .catch((err) => {
     console.log(err);
   });
+
+export function dropCardFromServer(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Успешно удалено");
+      } else {
+        console.log("Возникла ошибка");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+
+
+// fetch(`${config.baseUrl}/cards`, {
+//   headers: config.headers,
+// })
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     }
+//   })
+//   .then((data) => {
+//     data.forEach((card) => {
+//       console.log(card._id);
+//     });
+//   });

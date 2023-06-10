@@ -6,7 +6,7 @@ import {
   popupImageTitle,
 } from "../components/script.js";
 import { openPopup } from "../components/modal.js";
-
+import { dropCardFromServer } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(
   ".popup__container_add"
@@ -17,9 +17,10 @@ export const popupCardForm = document.querySelector(".popup__card-form");
 export const placeNameInput = document.getElementById(
   "popup__inputs_place_name"
 );
+
 export const linkInput = document.getElementById("popup__inputs_place_link");
 
-export function createCard(name, link, like, myId, ownerId) {
+export function createCard(name, link, like, myId, ownerId, cardId) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
   const textTitle = cardElement.querySelector(".element__title");
@@ -42,8 +43,11 @@ export function createCard(name, link, like, myId, ownerId) {
     buttonDeleteCard.style.display = "flex";
   }
 
+
+  
   buttonDeleteCard.addEventListener("click", () => {
-    cardElement.remove();
+    cardElement.remove(),
+    dropCardFromServer(cardId)
   });
   cardImage.addEventListener("click", () => {
     const imageUrl = cardImage.getAttribute("src");
@@ -53,6 +57,8 @@ export function createCard(name, link, like, myId, ownerId) {
     popupImageTitle.textContent = imageAlt;
     openPopup(popupSectionImage);
   });
+
+ 
   return cardElement;
 }
 

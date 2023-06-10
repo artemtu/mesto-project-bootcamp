@@ -21,7 +21,6 @@ import {
 } from "../components/card.js";
 
 import {
-  getInfoProfile,
   getCards,
   patchProfile,
   postCard,
@@ -122,8 +121,9 @@ export function publishedCards() {
           const link = card.link;
           const like = card.likes.length;
           const ownerId = card.owner._id;
+          const cardId  = card._id
 
-          const createdCard = createCard(name, link, like, myId, ownerId);
+          const createdCard = createCard(name, link, like, myId, ownerId, cardId);
 
           elementsContainer.append(createdCard);
         });
