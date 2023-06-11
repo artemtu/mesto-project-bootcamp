@@ -6,7 +6,7 @@ import {
   popupImageTitle,
 } from "../components/script.js";
 import { openPopup } from "../components/modal.js";
-import { dropCardFromServer } from "./api.js";
+import { dropCardFromServer, putLike, deleteLike } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(
   ".popup__container_add"
@@ -26,7 +26,7 @@ export function createCard(name, link, like, myId, ownerId, cardId) {
   const textTitle = cardElement.querySelector(".element__title");
   const likeButton = cardElement.querySelector(".element__like");
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
-  const likesCount = cardElement.querySelector(".element__like-counter");
+  let likesCount = cardElement.querySelector(".element__like-counter");
 
   textTitle.textContent = name;
   cardImage.src = link;
@@ -34,8 +34,27 @@ export function createCard(name, link, like, myId, ownerId, cardId) {
   likesCount.textContent = like;
 
   likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("element__liked");
+    // putLike(cardId).then((updatedLikesCount) => {
+    //   likesCount.textContent = updatedLikesCount;
+    // });
+
+    deleteLike(cardId).then((updatedLikesCount) => {
+      likesCount.textContent = updatedLikesCount;
+    });
   });
+
+  //функция, когда класс останется залайканным
+  // likeButton.addEventListener("click", () => {
+  //   if (likeButton.classList.contains("element__like")) {
+  //     putLike(cardId);
+  //     likeButton.classList.add("element__liked");
+
+  //   } else {
+  //     deleteLike(cardId);
+  //     likeButton.classList.remove("element__liked");
+  //     likeButton.classList.add("element__like");
+  //   }
+  // });
 
   if (ownerId !== myId) {
     buttonDeleteCard.style.display = "none";
@@ -43,11 +62,8 @@ export function createCard(name, link, like, myId, ownerId, cardId) {
     buttonDeleteCard.style.display = "flex";
   }
 
-
-  
   buttonDeleteCard.addEventListener("click", () => {
-    cardElement.remove(),
-    dropCardFromServer(cardId)
+    cardElement.remove(), dropCardFromServer(cardId);
   });
   cardImage.addEventListener("click", () => {
     const imageUrl = cardImage.getAttribute("src");
@@ -58,7 +74,6 @@ export function createCard(name, link, like, myId, ownerId, cardId) {
     openPopup(popupSectionImage);
   });
 
- 
   return cardElement;
 }
 

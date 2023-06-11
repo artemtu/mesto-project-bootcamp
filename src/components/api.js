@@ -114,7 +114,7 @@ Promise.all([getInfoProfile(), getCards(), getMyId()])
   });
 
 export function dropCardFromServer(cardId) {
-  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   })
@@ -130,7 +130,60 @@ export function dropCardFromServer(cardId) {
     });
 }
 
+// export function putLike(cardId) {
+//   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+//     method: "PUT",
+//     headers: config.headers,
+//   })
+//     .then((response) => {
+//       if (response.ok) {
+//         console.log("Лайк засчитан");
+//       } else {
+//         console.log("Лайк НЕ засчитан");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }
 
+export function putLike(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: config.headers,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((updatedCardData) => {
+      const updatedLikesCount = updatedCardData.likes.length;
+      return updatedLikesCount;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export function deleteLike(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((updatedCardData) => {
+      const updatedLikesCount = updatedCardData.likes.length;
+      return updatedLikesCount;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 // fetch(`${config.baseUrl}/cards`, {
 //   headers: config.headers,
@@ -142,6 +195,27 @@ export function dropCardFromServer(cardId) {
 //   })
 //   .then((data) => {
 //     data.forEach((card) => {
-//       console.log(card._id);
+//       console.log(card);
 //     });
 //   });
+
+// fetch(`${config.baseUrl}/cards`, {
+//   headers: config.headers,
+// })
+//   .then((response) => {
+//     if (response.ok) {
+//       return response.json();
+//     }
+//   })
+//   .then((data) => {
+//     data.forEach((card) => {
+//       console.log(card);
+//     });
+//   });
+
+// function showLikes(cards){
+//   cards.forEach((element)=> {
+//     element.
+
+//   })
+// }
