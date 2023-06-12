@@ -24,6 +24,7 @@ import {
   getCards,
   patchProfile,
   postCard,
+
 } from "../components/api.js";
 
 // попап профиль
@@ -123,10 +124,11 @@ export function publishedCards() {
           const ownerId = card.owner._id;
           const cardId  = card._id
           const likesArray = card.likes
-
           const createdCard = createCard(name, link, like, myId, ownerId, cardId,likesArray);
-
           elementsContainer.append(createdCard);
+          
+
+          
         });
       });
     })

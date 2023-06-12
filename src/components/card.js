@@ -6,7 +6,7 @@ import {
   popupImageTitle,
 } from "../components/script.js";
 import { openPopup } from "../components/modal.js";
-import { dropCardFromServer, putLike, deleteLike } from "./api.js";
+import { dropCardFromServer, putLike, deleteLike, updatedLikeStatus } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(
   ".popup__container_add"
@@ -28,6 +28,7 @@ export function createCard(
   ownerId,
   cardId,
   likesArray
+  
 ) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
@@ -41,8 +42,8 @@ export function createCard(
   cardImage.alt = name;
   likesCount.textContent = like;
 
-
   likeButton.addEventListener("click", () => {
+
     if (likeButton.classList.contains("element__liked")) {
       deleteLike(cardId).then((updatedLikesCount) => {
         likesCount.textContent = updatedLikesCount;
@@ -52,13 +53,14 @@ export function createCard(
         likesCount.textContent = updatedLikesCount;
       });
     }
-
     if (likeButton.classList.contains("element__like")) {
       likeButton.classList.remove("element__like");
       likeButton.classList.add("element__liked");
+      
     } else {
       likeButton.classList.remove("element__liked");
       likeButton.classList.add("element__like");
+  
     }
   });
 
@@ -88,3 +90,19 @@ export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
+
+
+
+
+
+
+// likesArray.forEach((element) => {
+//   const everyCard = element._id;
+//   if (myId === everyCard) {
+//     likeButton.classList.remove("element__like");
+//     likeButton.classList.add("element__liked");
+//   }  else {
+//     likeButton.classList.remove("element__liked");
+//     likeButton.classList.add("element__like");
+//   }
+// });

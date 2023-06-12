@@ -131,7 +131,6 @@ export function dropCardFromServer(cardId) {
     });
 }
 
-
 export function putLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
@@ -185,17 +184,15 @@ export function deleteLike(cardId) {
 //     });
 //   });
 
-
-// export function updateLikes(likesArray, myId, likeButton){
-//   likesArray.forEach((element) => {
-//     const everyCard = element._id;
-//     if (myId === everyCard) {
-//       likeButton.classList.remove("element__like");
-//       likeButton.classList.add("element__liked");
-//     } else {
-//       likeButton.classList.remove("element__liked");
-//       likeButton.classList.add("element__like");
-//     }
-//     return likesArray;
-//   });
-// }
+export function updatedLikeStatus(likesArray, myId, likeButton) {
+  likesArray.forEach((element) => {
+    const everyCard = element._id;
+    if (myId === everyCard) {
+      likeButton.classList.remove("element__like");
+      likeButton.classList.add("element__liked");
+    } else {
+      likeButton.classList.remove("element__liked");
+      likeButton.classList.add("element__like");
+    }
+  });
+}
