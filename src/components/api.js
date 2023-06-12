@@ -99,6 +99,7 @@ export function getMyId() {
       }
     })
     .then((data) => {
+      // console.log(data)
       return data._id;
     });
 }
@@ -114,7 +115,7 @@ Promise.all([getInfoProfile(), getCards(), getMyId()])
   });
 
 export function dropCardFromServer(cardId) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   })
@@ -130,22 +131,6 @@ export function dropCardFromServer(cardId) {
     });
 }
 
-// export function putLike(cardId) {
-//   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
-//     method: "PUT",
-//     headers: config.headers,
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         console.log("Лайк засчитан");
-//       } else {
-//         console.log("Лайк НЕ засчитан");
-//       }
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
 
 export function putLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
@@ -161,6 +146,7 @@ export function putLike(cardId) {
       const updatedLikesCount = updatedCardData.likes.length;
       return updatedLikesCount;
     })
+
     .catch((error) => {
       console.error(error);
     });
@@ -199,23 +185,17 @@ export function deleteLike(cardId) {
 //     });
 //   });
 
-// fetch(`${config.baseUrl}/cards`, {
-//   headers: config.headers,
-// })
-//   .then((response) => {
-//     if (response.ok) {
-//       return response.json();
+
+// export function updateLikes(likesArray, myId, likeButton){
+//   likesArray.forEach((element) => {
+//     const everyCard = element._id;
+//     if (myId === everyCard) {
+//       likeButton.classList.remove("element__like");
+//       likeButton.classList.add("element__liked");
+//     } else {
+//       likeButton.classList.remove("element__liked");
+//       likeButton.classList.add("element__like");
 //     }
-//   })
-//   .then((data) => {
-//     data.forEach((card) => {
-//       console.log(card);
-//     });
+//     return likesArray;
 //   });
-
-// function showLikes(cards){
-//   cards.forEach((element)=> {
-//     element.
-
-//   })
 // }

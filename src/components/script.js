@@ -122,8 +122,9 @@ export function publishedCards() {
           const like = card.likes.length;
           const ownerId = card.owner._id;
           const cardId  = card._id
+          const likesArray = card.likes
 
-          const createdCard = createCard(name, link, like, myId, ownerId, cardId);
+          const createdCard = createCard(name, link, like, myId, ownerId, cardId,likesArray);
 
           elementsContainer.append(createdCard);
         });

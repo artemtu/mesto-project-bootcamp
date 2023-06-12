@@ -20,7 +20,15 @@ export const placeNameInput = document.getElementById(
 
 export const linkInput = document.getElementById("popup__inputs_place_link");
 
-export function createCard(name, link, like, myId, ownerId, cardId) {
+export function createCard(
+  name,
+  link,
+  like,
+  myId,
+  ownerId,
+  cardId,
+  likesArray
+) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
   const textTitle = cardElement.querySelector(".element__title");
@@ -33,28 +41,27 @@ export function createCard(name, link, like, myId, ownerId, cardId) {
   cardImage.alt = name;
   likesCount.textContent = like;
 
-  likeButton.addEventListener("click", () => {
-    // putLike(cardId).then((updatedLikesCount) => {
-    //   likesCount.textContent = updatedLikesCount;
-    // });
 
-    deleteLike(cardId).then((updatedLikesCount) => {
-      likesCount.textContent = updatedLikesCount;
-    });
+  likeButton.addEventListener("click", () => {
+    if (likeButton.classList.contains("element__liked")) {
+      deleteLike(cardId).then((updatedLikesCount) => {
+        likesCount.textContent = updatedLikesCount;
+      });
+    } else {
+      putLike(cardId).then((updatedLikesCount) => {
+        likesCount.textContent = updatedLikesCount;
+      });
+    }
+
+    if (likeButton.classList.contains("element__like")) {
+      likeButton.classList.remove("element__like");
+      likeButton.classList.add("element__liked");
+    } else {
+      likeButton.classList.remove("element__liked");
+      likeButton.classList.add("element__like");
+    }
   });
 
-  //функция, когда класс останется залайканным
-  // likeButton.addEventListener("click", () => {
-  //   if (likeButton.classList.contains("element__like")) {
-  //     putLike(cardId);
-  //     likeButton.classList.add("element__liked");
-
-  //   } else {
-  //     deleteLike(cardId);
-  //     likeButton.classList.remove("element__liked");
-  //     likeButton.classList.add("element__like");
-  //   }
-  // });
 
   if (ownerId !== myId) {
     buttonDeleteCard.style.display = "none";
