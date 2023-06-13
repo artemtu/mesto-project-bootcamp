@@ -20,12 +20,7 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import {
-  getCards,
-  patchProfile,
-  postCard,
-
-} from "../components/api.js";
+import { getCards, patchProfile, postCard } from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -39,6 +34,14 @@ const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
 const profileSaveButton = document.querySelector(".popup__button");
+
+// попап аватар
+const popupEditProfileAvatar = document.querySelector(
+  ".profile__avatar-button"
+);
+const popupSectionAvatar = document.querySelector(".popup-profile-avatar");
+const avatarLinkInput = document.getElementById("popup__inputs_profile-avatar");
+const popupProfileAvatarForm = document.querySelector(".popup__change-avatar");
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -68,14 +71,13 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-//== операции с профилем//
+//== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
   openPopup(popupProfile);
   enableButton(profileSaveButton);
 });
-
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
@@ -83,11 +85,29 @@ function handleFormSubmitProfile(evt) {
   closePopup(popupProfile);
   patchProfile();
 }
-
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
-//=====================================================//
-// операции с попапом карточек
+// Профиль АВАТАР =============================
+
+function handleFormSubmitProfileAvatar(evt) {
+  evt.preventDefault();
+  closePopup(popupSectionAvatar);
+
+
+  // patchProfile();
+}
+
+popupProfileAvatarForm.addEventListener(
+  "submit",
+  handleFormSubmitProfileAvatar
+);
+
+popupEditProfileAvatar.addEventListener("click", () => {
+  openPopup(popupSectionAvatar);
+  // disableButton(cardSaveButton);
+});
+
+// операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
   openPopup(popupCardAdd, popupCardContainer);
@@ -107,8 +127,6 @@ function handleFormSubmitCard(evt) {
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
-// открытие карточек (попап)
-
 // ==================================================//
 
 // добавление карточек //
@@ -122,13 +140,18 @@ export function publishedCards() {
           const link = card.link;
           const like = card.likes.length;
           const ownerId = card.owner._id;
-          const cardId  = card._id
-          const likesArray = card.likes
-          const createdCard = createCard(name, link, like, myId, ownerId, cardId,likesArray);
+          const cardId = card._id;
+          const likesArray = card.likes;
+          const createdCard = createCard(
+            name,
+            link,
+            like,
+            myId,
+            ownerId,
+            cardId,
+            likesArray
+          );
           elementsContainer.append(createdCard);
-          
-
-          
         });
       });
     })
@@ -159,4 +182,5 @@ enableValidation(validitySettings);
 export const popupLists = document.querySelectorAll(".popup");
 
 // БЛОК РАБОТ С СЕРВЕРОМ
+
 

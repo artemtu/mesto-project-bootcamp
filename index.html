@@ -33,6 +33,23 @@
         <footer class="footer">
             <p class="footer__author">© 2023 Mesto Russia</p>
         </footer>
+
+        <section class="popup popup-profile-avatar">
+            <div class="popup__container popup__container_profile-avatar">
+                <form class="popup__profile-form popup__change-avatar" name="profile__avatar" novalidate>
+                    <h2 class="popup__profile-form-title">Обновить аватар</h2>
+                    <div class="popup__inputs">
+                        <input type="url" id="popup__inputs_profile-avatar" name="profile__avatar" class="popup__inputs-text" placeholder="Ссылка" required />
+                        <span class="popup__inputs-text-error" id="error-popup__inputs_profile-avatar"></span>
+                    </div>
+                    <button class="popup__button" type="submit" id="profile-submit">Сохранить</button>
+                    
+                </form>
+                <button class="popup__close-icon popup-close-profile" type="button"></button>
+            </div>
+        </section>
+
+
         
         <section class="popup popup-profile">
             <div class="popup__container popup__container_profile">

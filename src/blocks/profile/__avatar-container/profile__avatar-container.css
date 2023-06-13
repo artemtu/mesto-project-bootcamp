@@ -9,3 +9,9 @@
 .profile__avatar-container:hover .profile__avatar-button {
   opacity: 1; /* Показываем кнопку при наведении на контейнер */
 }
+
+@media screen and (max-width: 650px) {
+  .profile__avatar-container {
+    align-self: center;
+  }
+}
