@@ -1,13 +1,41 @@
-.profile__avatar {
-  max-width: 120px;
-  max-height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
+.avatar__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 150px;
   /* outline: 1px solid red; */
 }
 
-@media screen and (max-width: 650px) {
-  .profile__avatar {
-    align-self: center;
-  }
+.profile__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.profile__avatar-button {
+  position: absolute;
+  transform: translate(0%, 0%);
+  width: 26px;
+  height: 26px;
+  background-color: rgba(0, 0, 0, 0.0);
+  cursor: pointer;
+  background-image: url('../../../images/VectorpencillForAva.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border:none;
+  z-index: 50;
+  opacity: 0; /* Изначально кнопка скрыта */
+  transition: opacity 0.3s ease; /* Добавляем плавный переход */
+  /* outline: 1px solid red; */
+}
+
+.avatar__container:hover .profile__avatar {
+  opacity: 0.2; /* Затемняем аватарку при наведении */
+}
+
+.avatar__container:hover .profile__avatar-button {
+  opacity: 1; /* Показываем кнопку при наведении на контейнер */
 }

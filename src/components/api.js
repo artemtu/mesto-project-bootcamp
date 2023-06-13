@@ -184,15 +184,28 @@ export function deleteLike(cardId) {
 //     });
 //   });
 
-export function updatedLikeStatus(likesArray, myId, likeButton) {
-  likesArray.forEach((element) => {
-    const everyCard = element._id;
-    if (myId === everyCard) {
-      likeButton.classList.remove("element__like");
-      likeButton.classList.add("element__liked");
-    } else {
-      likeButton.classList.remove("element__liked");
-      likeButton.classList.add("element__like");
+// export function updatedLikeStatus(likesArray, myId, likeButton) {
+//   likesArray.forEach((element) => {
+//     const everyCard = element._id;
+//     if (myId === everyCard) {
+//       likeButton.classList.remove("element__like");
+//       likeButton.classList.add("element__liked");
+//     } else {
+//       likeButton.classList.remove("element__liked");
+//       likeButton.classList.add("element__like");
+//     }
+//   });
+// }
+
+
+fetch(`${config.baseUrl}/users/me/avatar`, {
+  headers: config.headers,
+})
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
     }
+  })
+  .then((data) => {
+    console.log(data)
   });
-}

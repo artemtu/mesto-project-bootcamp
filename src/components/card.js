@@ -6,7 +6,7 @@ import {
   popupImageTitle,
 } from "../components/script.js";
 import { openPopup } from "../components/modal.js";
-import { dropCardFromServer, putLike, deleteLike, updatedLikeStatus } from "./api.js";
+import { dropCardFromServer, putLike, deleteLike } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
 export const popupCardContainer = document.querySelector(
   ".popup__container_add"
