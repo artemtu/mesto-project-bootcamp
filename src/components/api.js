@@ -104,11 +104,12 @@ export function getMyId() {
     });
 }
 
-Promise.all([getInfoProfile(), getCards(), getMyId()])
+Promise.all([getInfoProfile(), , getCards(), getMyId(),patchProfile])
   .then(([cards]) => {
     getInfoProfile();
     getCards();
     publishedCards(cards);
+    patchProfile();
   })
   .catch((err) => {
     console.log(err);
@@ -197,15 +198,21 @@ export function deleteLike(cardId) {
 //   });
 // }
 
-
-fetch(`${config.baseUrl}/users/me/avatar`, {
-  headers: config.headers,
-})
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-  })
-  .then((data) => {
-    console.log(data)
-  });
+// export function updateAvatar(avatarLinkInput) {
+//   return fetch(`${config.baseUrl}/users/me/avatar`, {
+//     method: "PATCH",
+//     headers: config.headers,
+//     body: JSON.stringify({
+//       avatar: avatarLinkInput.value
+//     }),
+//   })
+//     .then((response) => {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error("Failed to update avatar");
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }

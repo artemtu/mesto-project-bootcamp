@@ -71,12 +71,33 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
+// Профиль АВАТАР =============================
+// import { updateAvatar } from "../components/api.js";
+// function handleFormSubmitProfileAvatar(evt) {
+//   evt.preventDefault();
+//   closePopup(popupSectionAvatar);
+//   updateAvatar(avatarLinkInput);
+// }
+
+// // https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80
+
+// popupProfileAvatarForm.addEventListener(
+//   "submit",
+//   handleFormSubmitProfileAvatar
+// );
+
+popupEditProfileAvatar.addEventListener("click", () => {
+  openPopup(popupSectionAvatar);
+  disableButton(cardSaveButton);
+});
+
 //== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
   openPopup(popupProfile);
   enableButton(profileSaveButton);
+  
 });
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
@@ -87,25 +108,7 @@ function handleFormSubmitProfile(evt) {
 }
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
-// Профиль АВАТАР =============================
 
-function handleFormSubmitProfileAvatar(evt) {
-  evt.preventDefault();
-  closePopup(popupSectionAvatar);
-
-
-  // patchProfile();
-}
-
-popupProfileAvatarForm.addEventListener(
-  "submit",
-  handleFormSubmitProfileAvatar
-);
-
-popupEditProfileAvatar.addEventListener("click", () => {
-  openPopup(popupSectionAvatar);
-  // disableButton(cardSaveButton);
-});
 
 // операции с попапом карточек =============================
 
