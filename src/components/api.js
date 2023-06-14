@@ -45,6 +45,10 @@ export function patchProfile() {
       about: profileBio.textContent,
     }),
   });
+  // .then((data) => {
+  //   profileName.textContent = data.name;
+  //   profileBio.textContent = data.about;
+  // })
 }
 
 // fetch(`${config.baseUrl}/users/me`, {
@@ -104,12 +108,11 @@ export function getMyId() {
     });
 }
 
-Promise.all([getInfoProfile(), , getCards(), getMyId(),patchProfile])
+Promise.all([getInfoProfile(), , getCards(), getMyId()])
   .then(([cards]) => {
     getInfoProfile();
     getCards();
     publishedCards(cards);
-    patchProfile();
   })
   .catch((err) => {
     console.log(err);
@@ -198,21 +201,26 @@ export function deleteLike(cardId) {
 //   });
 // }
 
-// export function updateAvatar(avatarLinkInput) {
-//   return fetch(`${config.baseUrl}/users/me/avatar`, {
-//     method: "PATCH",
-//     headers: config.headers,
-//     body: JSON.stringify({
-//       avatar: avatarLinkInput.value
-//     }),
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       throw new Error("Failed to update avatar");
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// }
+
+export function updateAvatar(avatarLinkInput) {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: avatarLinkInput.value
+    }),
+  })
+
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error("Failed to update avatar");
+  })
+  .then((data) => {
+    profileAvatar.src = data.avatar;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}

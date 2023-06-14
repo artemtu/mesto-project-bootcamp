@@ -20,7 +20,7 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import { getCards, patchProfile, postCard } from "../components/api.js";
+import { getCards, patchProfile, postCard, updateAvatar } from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -28,7 +28,7 @@ const popupEditProfileButton = document.querySelector(".profile__edit");
 export const profileAvatar = document.querySelector(".profile__avatar");
 export const profileBio = document.querySelector(".profile__bio");
 export const profileName = document.querySelector(".profile__author");
-const popupProfileForm = document.querySelector(".popup__profile-form");
+const popupProfileForm = popupProfile.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
@@ -41,7 +41,8 @@ const popupEditProfileAvatar = document.querySelector(
 );
 const popupSectionAvatar = document.querySelector(".popup-profile-avatar");
 const avatarLinkInput = document.getElementById("popup__inputs_profile-avatar");
-const popupProfileAvatarForm = document.querySelector(".popup__change-avatar");
+const popupProfileAvatarForm = document.querySelector(".popup__avatar-form");
+const avatarSaveButton = document.getElementById('avatar-submit')
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -72,24 +73,23 @@ closeButtons.forEach((button) => {
 });
 
 // Профиль АВАТАР =============================
-// import { updateAvatar } from "../components/api.js";
-// function handleFormSubmitProfileAvatar(evt) {
-//   evt.preventDefault();
-//   closePopup(popupSectionAvatar);
-//   updateAvatar(avatarLinkInput);
-// }
-
-// // https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80
-
-// popupProfileAvatarForm.addEventListener(
-//   "submit",
-//   handleFormSubmitProfileAvatar
-// );
-
 popupEditProfileAvatar.addEventListener("click", () => {
   openPopup(popupSectionAvatar);
-  disableButton(cardSaveButton);
+  disableButton(avatarSaveButton);
 });
+
+
+
+function handleFormSubmitProfileAvatar(evt) {
+  evt.preventDefault();
+  closePopup(popupSectionAvatar);
+  updateAvatar(avatarLinkInput)
+}
+popupProfileAvatarForm.addEventListener("submit", handleFormSubmitProfileAvatar);
+
+// // https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80
+// https://images.unsplash.com/photo-1685052392951-4eb54985d3ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80
+
 
 //== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
@@ -104,10 +104,9 @@ function handleFormSubmitProfile(evt) {
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
   closePopup(popupProfile);
-  patchProfile();
+  patchProfile()
 }
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
-
 
 
 // операции с попапом карточек =============================
