@@ -23,12 +23,11 @@ export const linkInput = document.getElementById("popup__inputs_place_link");
 export function createCard(
   name,
   link,
-  like,
+  like = 0,
   myId,
   ownerId,
   cardId,
-  likesArray
-  
+  likesArray = []
 ) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".element__image");
@@ -37,13 +36,19 @@ export function createCard(
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
   let likesCount = cardElement.querySelector(".element__like-counter");
 
+  const isLiked = likesArray.find(like => myId === like._id)
+
+  if (isLiked) {
+    likeButton.classList.remove("element__like");
+    likeButton.classList.add("element__liked");
+  }
+
   textTitle.textContent = name;
   cardImage.src = link;
   cardImage.alt = name;
   likesCount.textContent = like;
 
   likeButton.addEventListener("click", () => {
-
     if (likeButton.classList.contains("element__liked")) {
       deleteLike(cardId).then((updatedLikesCount) => {
         likesCount.textContent = updatedLikesCount;
@@ -56,14 +61,11 @@ export function createCard(
     if (likeButton.classList.contains("element__like")) {
       likeButton.classList.remove("element__like");
       likeButton.classList.add("element__liked");
-      
     } else {
       likeButton.classList.remove("element__liked");
       likeButton.classList.add("element__like");
-  
     }
   });
-
 
   if (ownerId !== myId) {
     buttonDeleteCard.style.display = "none";
@@ -90,11 +92,6 @@ export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
-
-
-
-
-
 
 // likesArray.forEach((element) => {
 //   const everyCard = element._id;
