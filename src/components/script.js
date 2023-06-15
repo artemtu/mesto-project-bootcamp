@@ -1,34 +1,43 @@
-// import '../../src/pages/index.css'
-import {
-  enableButton,
-  disableButton,
-  enableValidation,
-} from "../components/validation.js";
-import {
-  openPopup,
-  closePopup,
-  // closePopupOverlay,
-} from "../components/modal.js";
+import '../../src/pages/index.css'
+import { disableButton, enableValidation } from "../components/validation.js";
+import { openPopup, closePopup } from "../components/modal.js";
 import {
   popupCardButton,
   popupCardForm,
   popupCardAdd,
   popupCardContainer,
-  placeNameInput,
-  linkInput,
   createCard,
-  addCardToPage,
 } from "../components/card.js";
+import { placeNameInput, linkInput } from "../components/card.js";
+import {
+  getMyId,
+  getCards,
+  patchProfile,
+  postCard,
+  updateAvatar,
+} from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupEditProfileButton = document.querySelector(".profile__edit");
-const popupProfileForm = document.querySelector(".popup__profile-form");
+export const profileAvatar = document.querySelector(".profile__avatar");
+export const profileBio = document.querySelector(".profile__bio");
+export const profileName = document.querySelector(".profile__author");
+const popupProfileForm = popupProfile.querySelector(".popup__profile-form");
 const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-const profileSaveButton = document.querySelector(".popup__button");
+const profileSaveButton = document.getElementById("profile-submit");
+
+// попап аватар
+const popupEditProfileAvatar = document.querySelector(
+  ".profile__avatar-button"
+);
+const popupSectionAvatar = document.querySelector(".popup-profile-avatar");
+const avatarLinkInput = document.getElementById("popup__inputs_profile-avatar");
+const popupProfileAvatarForm = document.querySelector(".popup__avatar-form");
+const avatarSaveButton = document.getElementById("avatar-submit");
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -50,6 +59,7 @@ const cardSaveButton = document.querySelector("#card-submit");
 
 const closeButtons = document.querySelectorAll(".popup__close-icon");
 
+export const popupLists = document.querySelectorAll(".popup");
 //==============================================================================//
 
 // закрытие всех попапов по кнопке
@@ -58,25 +68,57 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-//== операции с профилем//
+// Профиль АВАТАР =============================
+popupEditProfileAvatar.addEventListener("click", () => {
+  openPopup(popupSectionAvatar);
+  disableButton(avatarSaveButton);
+});
+
+function handleFormSubmitProfileAvatar(evt) {
+  evt.preventDefault();
+  showLoadingStatus(avatarSaveButton);
+  updateAvatar(avatarLinkInput)
+    .then(() => {
+      resetForm(popupProfileAvatarForm);
+      resetButtonText(avatarSaveButton);
+      closePopup(popupSectionAvatar);
+    })
+    .catch((error) => {
+      // Обработка ошибок при обновлении аватара
+      console.error(error);
+    });
+}
+
+popupProfileAvatarForm.addEventListener(
+  "submit",
+  handleFormSubmitProfileAvatar
+);
+
+//== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
   openPopup(popupProfile);
-  enableButton(profileSaveButton);
 });
-
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
-  closePopup(popupProfile);
+  showLoadingStatus(profileSaveButton);
+  patchProfile()
+    .then(() => {
+      resetForm(popupProfileForm);
+      resetButtonText(profileSaveButton);
+      closePopup(popupProfile);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
-//=====================================================//
-// операции с попапом карточек
+// операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
   openPopup(popupCardAdd, popupCardContainer);
@@ -85,57 +127,62 @@ popupCardButton.addEventListener("click", () => {
 
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const name = placeNameInput.value;
-  const link = linkInput.value;
-  addCardToPage(name, link);
-  closePopup(popupCardAdd);
-  placeNameInput.value = "";
-  linkInput.value = "";
+  showLoadingStatus(cardSaveButton);
+  postCard(placeNameInput.value, linkInput.value)
+    .then((res) => {
+      elementsContainer.prepend(
+        createCard(
+          res.name,
+          res.link,
+          res.likes.length,
+          res.owner._id,
+          res.owner._id,
+          res._id,
+          res.likes
+        )
+      );
+      resetForm(popupCardForm);
+      resetButtonText(cardSaveButton);
+      closePopup(popupCardAdd);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
-// открытие карточек (попап)
-
 // ==================================================//
 
 // добавление карточек //
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
-initialCards.forEach((card) => {
-  const name = card.name;
-  const link = card.link;
-  const createdCard = createCard(name, link);
-  elementsContainer.append(createdCard);
-});
-
-// ==================================================//
+export function publishedCards() {
+  getMyId()
+    .then((myId) => {
+      getCards().then((data) => {
+        data.forEach((card) => {
+          const name = card.name;
+          const link = card.link;
+          const like = card.likes.length;
+          const ownerId = card.owner._id;
+          const cardId = card._id;
+          const likesArray = card.likes;
+          const createdCard = createCard(
+            name,
+            link,
+            like,
+            myId,
+            ownerId,
+            cardId,
+            likesArray
+          );
+          elementsContainer.append(createdCard);
+        });
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 // валидация//
 
@@ -150,10 +197,19 @@ enableValidation(validitySettings);
 
 //==============================================//
 
-// закрытие попапа - клик overlay и esc//
+// изменение текста на кнопках при отправке формы
 
-export const popupLists = document.querySelectorAll(".popup");
+let originalButtonText;
 
-// closePopupOverlay(popupProfile);
-// closePopupOverlay(popupCardAdd);
-// closePopupOverlay(popupSectionImage);
+function showLoadingStatus(button) {
+  originalButtonText = button.textContent;
+  button.textContent = "Сохранение...";
+}
+
+function resetForm(form) {
+  form.reset();
+}
+
+function resetButtonText(button) {
+  button.textContent = originalButtonText;
+}
