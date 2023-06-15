@@ -28,7 +28,7 @@ const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-const profileSaveButton2 = document.getElementById("profile-submit");
+const profileSaveButton = document.getElementById("profile-submit");
 
 // попап аватар
 const popupEditProfileAvatar = document.querySelector(
@@ -59,6 +59,7 @@ const cardSaveButton = document.querySelector("#card-submit");
 
 const closeButtons = document.querySelectorAll(".popup__close-icon");
 
+export const popupLists = document.querySelectorAll(".popup");
 //==============================================================================//
 
 // закрытие всех попапов по кнопке
@@ -93,9 +94,6 @@ popupProfileAvatarForm.addEventListener(
   handleFormSubmitProfileAvatar
 );
 
-// // https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80
-// https://images.unsplash.com/photo-1685052392951-4eb54985d3ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80
-
 //== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
@@ -106,17 +104,20 @@ function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
-  showLoadingStatus(profileSaveButton2);
-  patchProfile().then(() => {
-    resetForm(popupProfileForm);
-    resetButtonText(profileSaveButton2);
-    closePopup(popupProfile);
-  });
+  showLoadingStatus(profileSaveButton);
+  patchProfile()
+    .then(() => {
+      resetForm(popupProfileForm);
+      resetButtonText(profileSaveButton);
+      closePopup(popupProfile);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
-// console.log(profileSaveButton );
 // операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
@@ -127,22 +128,26 @@ popupCardButton.addEventListener("click", () => {
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
   showLoadingStatus(cardSaveButton);
-  postCard(placeNameInput.value, linkInput.value).then((res) => {
-    elementsContainer.prepend(
-      createCard(
-        res.name,
-        res.link,
-        res.likes.length,
-        res.owner._id,
-        res.owner._id,
-        res._id,
-        res.likes
-      )
-    );
-    resetForm(popupCardForm);
-    resetButtonText(cardSaveButton);
-    closePopup(popupCardAdd);
-  });
+  postCard(placeNameInput.value, linkInput.value)
+    .then((res) => {
+      elementsContainer.prepend(
+        createCard(
+          res.name,
+          res.link,
+          res.likes.length,
+          res.owner._id,
+          res.owner._id,
+          res._id,
+          res.likes
+        )
+      );
+      resetForm(popupCardForm);
+      resetButtonText(cardSaveButton);
+      closePopup(popupCardAdd);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
@@ -179,8 +184,6 @@ export function publishedCards() {
     });
 }
 
-// ==================================================//
-
 // валидация//
 
 const validitySettings = {
@@ -193,12 +196,6 @@ const validitySettings = {
 enableValidation(validitySettings);
 
 //==============================================//
-
-// закрытие попапа - клик overlay и esc//
-
-export const popupLists = document.querySelectorAll(".popup");
-
-// БЛОК РАБОТ С СЕРВЕРОМ
 
 // изменение текста на кнопках при отправке формы
 

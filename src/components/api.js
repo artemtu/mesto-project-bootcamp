@@ -42,6 +42,8 @@ export function patchProfile() {
       name: profileName.textContent,
       about: profileBio.textContent,
     }),
+  }).catch((error) => {
+    console.error(error);
   });
 }
 
@@ -69,16 +71,14 @@ export function postCard(name, link) {
     headers: config.headers,
     body: JSON.stringify({
       name,
-      link
+      link,
     }),
   })
-  .then((res) => res.json())
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
-
-
 
 export function getMyId() {
   return fetch(`${config.baseUrl}/users/me`, {
@@ -91,6 +91,9 @@ export function getMyId() {
     })
     .then((data) => {
       return data._id;
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
@@ -165,20 +168,19 @@ export function updateAvatar(avatarLinkInput) {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      avatar: avatarLinkInput.value
+      avatar: avatarLinkInput.value,
     }),
   })
-
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error("Failed to update avatar");
-  })
-  .then((data) => {
-    profileAvatar.src = data.avatar;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Failed to update avatar");
+    })
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
