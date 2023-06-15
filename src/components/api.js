@@ -90,8 +90,23 @@ export function postCard() {
       name: placeNameInput.value,
       link: linkInput.value,
     }),
+  })
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error("Error creating card");
+  })
+  .then((cardData) => {
+    const cardId = cardData._id;
+    console.log(cardId)
+  })
+  .catch((error) => {
+    console.error("Error:", error);
   });
 }
+
+
 
 export function getMyId() {
   return fetch(`${config.baseUrl}/users/me`, {

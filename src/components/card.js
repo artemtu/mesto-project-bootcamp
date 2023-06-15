@@ -93,13 +93,3 @@ export function addCardToPage(name, link) {
   elementsContainer.prepend(createdCard);
 }
 
-// likesArray.forEach((element) => {
-//   const everyCard = element._id;
-//   if (myId === everyCard) {
-//     likeButton.classList.remove("element__like");
-//     likeButton.classList.add("element__liked");
-//   }  else {
-//     likeButton.classList.remove("element__liked");
-//     likeButton.classList.add("element__like");
-//   }
-// });

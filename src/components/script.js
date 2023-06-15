@@ -20,7 +20,12 @@ import {
   addCardToPage,
 } from "../components/card.js";
 
-import { getCards, patchProfile, postCard, updateAvatar } from "../components/api.js";
+import {
+  getCards,
+  patchProfile,
+  postCard,
+  updateAvatar,
+} from "../components/api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -33,7 +38,8 @@ const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-const profileSaveButton = document.querySelector(".popup__button");
+// const profileSaveButton = document.querySelector(".popup__button");
+const profileSaveButton2 = document.getElementById("profile-submit");
 
 // попап аватар
 const popupEditProfileAvatar = document.querySelector(
@@ -42,7 +48,7 @@ const popupEditProfileAvatar = document.querySelector(
 const popupSectionAvatar = document.querySelector(".popup-profile-avatar");
 const avatarLinkInput = document.getElementById("popup__inputs_profile-avatar");
 const popupProfileAvatarForm = document.querySelector(".popup__avatar-form");
-const avatarSaveButton = document.getElementById('avatar-submit')
+const avatarSaveButton = document.getElementById("avatar-submit");
 
 // попап открытия изображения
 export const popupSectionImage = document.querySelector(".popup-image");
@@ -78,37 +84,50 @@ popupEditProfileAvatar.addEventListener("click", () => {
   disableButton(avatarSaveButton);
 });
 
-
-
 function handleFormSubmitProfileAvatar(evt) {
   evt.preventDefault();
-  closePopup(popupSectionAvatar);
+  showLoadingStatus(avatarSaveButton);
   updateAvatar(avatarLinkInput)
+    .then(() => {
+      resetForm(popupProfileAvatarForm);
+      resetButtonText(avatarSaveButton);
+      closePopup(popupSectionAvatar);
+    })
+    .catch((error) => {
+      // Обработка ошибок при обновлении аватара
+      console.error(error);
+    });
 }
-popupProfileAvatarForm.addEventListener("submit", handleFormSubmitProfileAvatar);
+
+popupProfileAvatarForm.addEventListener(
+  "submit",
+  handleFormSubmitProfileAvatar
+);
 
 // // https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80
 // https://images.unsplash.com/photo-1685052392951-4eb54985d3ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80
-
 
 //== операции с профилем (РЕДАКТИРОВАНИЕ) //
 popupEditProfileButton.addEventListener("click", () => {
   bioInput.value = bio.textContent;
   authorNameInput.value = authorName.textContent;
   openPopup(popupProfile);
-  enableButton(profileSaveButton);
-  
 });
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
-  closePopup(popupProfile);
-  patchProfile()
+  showLoadingStatus(profileSaveButton2);
+  patchProfile().then(() => {
+    resetForm(popupProfileForm);
+    resetButtonText(profileSaveButton2);
+    closePopup(popupProfile);
+  });
 }
+
 popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 
-
+// console.log(profileSaveButton );
 // операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
@@ -121,10 +140,12 @@ function handleFormSubmitCard(evt) {
   const name = placeNameInput.value;
   const link = linkInput.value;
   addCardToPage(name, link);
-  postCard();
-  closePopup(popupCardAdd);
-  placeNameInput.value = "";
-  linkInput.value = "";
+  showLoadingStatus(cardSaveButton);
+  postCard().then(() => {
+    resetForm(popupCardForm);
+    resetButtonText(cardSaveButton);
+    closePopup(popupCardAdd);
+  });
 }
 
 popupCardForm.addEventListener("submit", handleFormSubmitCard);
@@ -185,4 +206,19 @@ export const popupLists = document.querySelectorAll(".popup");
 
 // БЛОК РАБОТ С СЕРВЕРОМ
 
+// изменение текста на кнопках при отправке формы
 
+let originalButtonText;
+
+function showLoadingStatus(button) {
+  originalButtonText = button.textContent;
+  button.textContent = "Сохранение...";
+}
+
+function resetForm(form) {
+  form.reset();
+}
+
+function resetButtonText(button) {
+  button.textContent = originalButtonText;
+}
