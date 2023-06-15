@@ -5,8 +5,6 @@ import {
   publishedCards,
 } from "../components/script.js";
 
-import { placeNameInput, linkInput } from "../components/card.js";
-
 const config = {
   baseUrl: "https://mesto.nomoreparties.co/v1/wbf-cohort-9",
   headers: {
@@ -45,23 +43,7 @@ export function patchProfile() {
       about: profileBio.textContent,
     }),
   });
-  // .then((data) => {
-  //   profileName.textContent = data.name;
-  //   profileBio.textContent = data.about;
-  // })
 }
-
-// fetch(`${config.baseUrl}/users/me`, {
-//   headers: config.headers,
-// })
-//   .then((response) => {
-//     if (response.ok) {
-//       return response.json();
-//     }
-//   })
-//   .then((data) => {
-//     console.log(data);
-//   });
 
 // данные карточек
 export function getCards() {
@@ -75,32 +57,22 @@ export function getCards() {
     })
     .then((data) => {
       return data;
-      // console.log(data);
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
-export function postCard() {
+export function postCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
-      name: placeNameInput.value,
-      link: linkInput.value,
+      name,
+      link
     }),
   })
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error("Error creating card");
-  })
-  .then((cardData) => {
-    const cardId = cardData._id;
-    console.log(cardId)
-  })
+  .then((res) => res.json())
   .catch((error) => {
     console.error("Error:", error);
   });
@@ -118,7 +90,6 @@ export function getMyId() {
       }
     })
     .then((data) => {
-      // console.log(data)
       return data._id;
     });
 }
@@ -188,34 +159,6 @@ export function deleteLike(cardId) {
       console.error(error);
     });
 }
-
-// fetch(`${config.baseUrl}/cards`, {
-//   headers: config.headers,
-// })
-//   .then((response) => {
-//     if (response.ok) {
-//       return response.json();
-//     }
-//   })
-//   .then((data) => {
-//     data.forEach((card) => {
-//       console.log(card);
-//     });
-//   });
-
-// export function updatedLikeStatus(likesArray, myId, likeButton) {
-//   likesArray.forEach((element) => {
-//     const everyCard = element._id;
-//     if (myId === everyCard) {
-//       likeButton.classList.remove("element__like");
-//       likeButton.classList.add("element__liked");
-//     } else {
-//       likeButton.classList.remove("element__liked");
-//       likeButton.classList.add("element__like");
-//     }
-//   });
-// }
-
 
 export function updateAvatar(avatarLinkInput) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {

@@ -1,26 +1,16 @@
 // import '../../src/pages/index.css'
-import {
-  enableButton,
-  disableButton,
-  enableValidation,
-} from "../components/validation.js";
-import {
-  openPopup,
-  closePopup,
-  // closePopupOverlay,
-} from "../components/modal.js";
+import { disableButton, enableValidation } from "../components/validation.js";
+import { openPopup, closePopup } from "../components/modal.js";
 import {
   popupCardButton,
   popupCardForm,
   popupCardAdd,
   popupCardContainer,
-  placeNameInput,
-  linkInput,
   createCard,
-  addCardToPage,
 } from "../components/card.js";
-
+import { placeNameInput, linkInput } from "../components/card.js";
 import {
+  getMyId,
   getCards,
   patchProfile,
   postCard,
@@ -38,7 +28,6 @@ const authorNameInput = document.getElementById("popup__inputs_name");
 const bioInput = document.getElementById("popup__inputs_bio");
 const authorName = document.querySelector(".profile__author");
 const bio = document.querySelector(".profile__bio");
-// const profileSaveButton = document.querySelector(".popup__button");
 const profileSaveButton2 = document.getElementById("profile-submit");
 
 // попап аватар
@@ -137,11 +126,19 @@ popupCardButton.addEventListener("click", () => {
 
 function handleFormSubmitCard(evt) {
   evt.preventDefault();
-  const name = placeNameInput.value;
-  const link = linkInput.value;
-  addCardToPage(name, link);
   showLoadingStatus(cardSaveButton);
-  postCard().then(() => {
+  postCard(placeNameInput.value, linkInput.value).then((res) => {
+    elementsContainer.prepend(
+      createCard(
+        res.name,
+        res.link,
+        res.likes.length,
+        res.owner._id,
+        res.owner._id,
+        res._id,
+        res.likes
+      )
+    );
     resetForm(popupCardForm);
     resetButtonText(cardSaveButton);
     closePopup(popupCardAdd);
@@ -153,7 +150,6 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 // ==================================================//
 
 // добавление карточек //
-import { getMyId } from "../components/api.js";
 export function publishedCards() {
   getMyId()
     .then((myId) => {
@@ -182,8 +178,6 @@ export function publishedCards() {
       console.error(error);
     });
 }
-
-// publishedCards()
 
 // ==================================================//
 
