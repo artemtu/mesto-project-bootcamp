@@ -60,8 +60,8 @@ export function createCard(
   likeButton.addEventListener("click", () => {
     if (likeButton.classList.contains("element__liked")) {
       deleteLike(cardId)
-        .then((updatedLikesCount) => {
-          likesCount.textContent = updatedLikesCount;
+        .then((updatedCardData) => {
+          likesCount.textContent = updatedCardData.likes.length;
           toggleLikeButton();
         })
         .catch((error) => {

@@ -31,8 +31,7 @@ export function patchProfile(name, bio) {
 export function getCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
-  })
-    .then(checkResponse)
+  }).then(checkResponse);
 }
 
 export function postCard(name, link) {
@@ -46,8 +45,6 @@ export function postCard(name, link) {
   }).then(checkResponse);
 }
 
-
-
 export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
@@ -59,21 +56,14 @@ export function putLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
-  })
-    .then(checkResponse)
-
+  }).then(checkResponse);
 }
 
 export function deleteLike(cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  })
-    .then(checkResponse)
-    .then((updatedCardData) => {
-      const updatedLikesCount = updatedCardData.likes.length;
-      return updatedLikesCount;
-    });
+  }).then(checkResponse);
 }
 
 export function updateAvatar(avatarLinkInput) {
