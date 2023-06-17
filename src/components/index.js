@@ -18,6 +18,10 @@ import {
   updateAvatar,
 } from "./api.js";
 
+import { showLoadingStatus,resetForm, resetButtonText } from "./utils.js";
+
+let myId;
+
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
 const popupEditProfileButton = document.querySelector(".profile__edit");
@@ -166,27 +170,25 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // добавление карточек //
 export function publishedCards() {
-  getMyId()
-    .then((myId) => {
-      getCards().then((data) => {
-        data.forEach((card) => {
-          const name = card.name;
-          const link = card.link;
-          const like = card.likes.length;
-          const ownerId = card.owner._id;
-          const cardId = card._id;
-          const likesArray = card.likes;
-          const createdCard = createCard(
-            name,
-            link,
-            like,
-            myId,
-            ownerId,
-            cardId,
-            likesArray
-          );
-          elementsContainer.append(createdCard);
-        });
+  getCards()
+    .then((data) => {
+      data.forEach((card) => {
+        const name = card.name;
+        const link = card.link;
+        const like = card.likes.length;
+        const ownerId = card.owner._id;
+        const cardId = card._id;
+        const likesArray = card.likes;
+        const createdCard = createCard(
+          name,
+          link,
+          like,
+          myId,
+          ownerId,
+          cardId,
+          likesArray
+        );
+        elementsContainer.append(createdCard);
       });
     })
     .catch((error) => {
@@ -211,18 +213,6 @@ enableValidation(validitySettings);
 
 let originalButtonText;
 
-function showLoadingStatus(button) {
-  originalButtonText = button.textContent;
-  button.textContent = "Сохранение...";
-}
-
-function resetForm(form) {
-  form.reset();
-}
-
-function resetButtonText(button) {
-  button.textContent = originalButtonText;
-}
 
 //==============================================//
 // БЛОК КОДА С СЕРВЕРА
@@ -232,6 +222,7 @@ getInfoProfile()
     profileName.textContent = data.name;
     profileBio.textContent = data.about;
     profileAvatar.src = data.avatar;
+    myId = data._id;
   })
   .catch((error) => {
     console.error(error);

@@ -4,3 +4,17 @@ export function checkResponse(res) {
   }
   return Promise.reject(`Ошибка ${res.status}`);
 }
+
+
+export function showLoadingStatus(button) {
+  originalButtonText = button.textContent;
+  button.textContent = "Сохранение...";
+}
+
+export function resetForm(form) {
+  form.reset();
+}
+
+export function resetButtonText(button) {
+  button.textContent = originalButtonText;
+}
