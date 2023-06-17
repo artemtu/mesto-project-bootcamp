@@ -1,4 +1,3 @@
-const popups = document.querySelectorAll(".popup");
 
 export function openPopup(popup) {
   popup.classList.add("popup__container_active");
@@ -17,11 +16,5 @@ function closePopupByEscape(evt) {
   }
 }
 
-// close popups when click overlay
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup__container_active")) {
-      closePopup(popup);
-    }
-  });
-});
+
+

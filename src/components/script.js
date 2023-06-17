@@ -61,6 +61,7 @@ const cardSaveButton = document.querySelector("#card-submit");
 const closeButtons = document.querySelectorAll(".popup__close-icon");
 
 export const popupLists = document.querySelectorAll(".popup");
+
 //==============================================================================//
 
 // закрытие всех попапов по кнопке
@@ -239,3 +240,11 @@ Promise.all([getInfoProfile(), , getCards()])
   .catch((error) => {
     console.error(error);
   });
+
+popupLists.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup__container_active")) {
+      closePopup(popup);
+    }
+  });
+});
