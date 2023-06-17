@@ -48,7 +48,7 @@ export function postCard(name, link) {
       name,
       link,
     }),
-  });
+  }).then(checkResponse);
 }
 
 export function getMyId() {
@@ -60,8 +60,6 @@ export function getMyId() {
       return data._id;
     });
 }
-
-
 
 export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
@@ -101,7 +99,5 @@ export function updateAvatar(avatarLinkInput) {
     body: JSON.stringify({
       avatar: avatarLinkInput.value,
     }),
-  })
-    .then(checkResponse)
-
+  }).then(checkResponse);
 }

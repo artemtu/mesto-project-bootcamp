@@ -147,6 +147,7 @@ function handleFormSubmitCard(evt) {
       resetForm(popupCardForm);
       resetButtonText(cardSaveButton);
       closePopup(popupCardAdd);
+
     })
     .catch((error) => {
       console.error(error);
