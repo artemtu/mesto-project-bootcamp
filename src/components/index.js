@@ -110,11 +110,13 @@ popupEditProfileButton.addEventListener("click", () => {
 });
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
-  authorName.textContent = authorNameInput.value;
-  bio.textContent = bioInput.value;
+
   showLoadingStatus(profileSaveButton);
-  patchProfile(profileName, profileBio)
+  patchProfile(authorNameInput, bioInput)
     .then(() => {
+      authorName.textContent = authorNameInput.value;
+      bio.textContent = bioInput.value;
+
       resetForm(popupProfileForm);
       closePopup(popupProfile);
     })

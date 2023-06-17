@@ -16,13 +16,13 @@ export function getInfoProfile() {
   }).then(checkResponse);
 }
 
-export function patchProfile(name, bio) {
+export function patchProfile(authorNameInput, bioInput) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      name: name.textContent,
-      about: bio.textContent,
+      name: authorNameInput.value,
+      about: bioInput.value,
     }),
   });
 }
