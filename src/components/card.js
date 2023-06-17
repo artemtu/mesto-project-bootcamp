@@ -80,9 +80,7 @@ export function createCard(
     .addEventListener("click", () => {
       cardElement.remove(), dropCardFromServer(cardId);
     })
-    .catch((error) => {
-      console.error(error);
-    });
+
   cardImage
     .addEventListener("click", () => {
       const imageUrl = cardImage.getAttribute("src");
@@ -91,9 +89,6 @@ export function createCard(
       popupImage.setAttribute("alt", imageAlt);
       popupImageTitle.textContent = imageAlt;
       openPopup(popupSectionImage);
-    })
-    .catch((error) => {
-      console.error(error);
     });
 
   return cardElement;
