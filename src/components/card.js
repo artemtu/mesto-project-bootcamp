@@ -85,15 +85,15 @@ export function createCard(
     buttonDeleteCard.style.display = "flex";
   }
 
-  // buttonDeleteCard.addEventListener("click", () => {
-  //   dropCardFromServer(cardId)
-  //     .then(() => {
-  //       cardElement.remove();
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // });
+  buttonDeleteCard.addEventListener("click", () => {
+    dropCardFromServer(cardId)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
   cardImage.addEventListener("click", () => {
     const imageUrl = cardImage.getAttribute("src");
     const imageAlt = cardImage.getAttribute("alt");
