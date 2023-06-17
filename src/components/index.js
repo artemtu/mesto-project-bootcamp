@@ -16,9 +16,7 @@ import {
   updateAvatar,
 } from "./api.js";
 
-import { showLoadingStatus,resetForm, resetButtonText } from "./utils.js";
-
-
+import { showLoadingStatus, resetForm, resetButtonText } from "./utils.js";
 
 let myId;
 
@@ -77,7 +75,6 @@ closeButtons.forEach((button) => {
 // Профиль АВАТАР =============================
 popupEditProfileAvatar.addEventListener("click", () => {
   openPopup(popupSectionAvatar);
-  disableButton(avatarSaveButton);
 });
 
 function handleFormSubmitProfileAvatar(evt) {
@@ -93,6 +90,7 @@ function handleFormSubmitProfileAvatar(evt) {
     })
     .finally(() => {
       resetButtonText(avatarSaveButton);
+      disableButton(avatarSaveButton);
     })
     .catch((error) => {
       console.error(error);
@@ -210,7 +208,6 @@ enableValidation(validitySettings);
 //==============================================//
 
 // изменение текста на кнопках при отправке формы
-
 
 //==============================================//
 // БЛОК КОДА С СЕРВЕРА
