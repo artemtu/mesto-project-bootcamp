@@ -61,10 +61,7 @@ export function putLike(cardId) {
     headers: config.headers,
   })
     .then(checkResponse)
-    .then((updatedCardData) => {
-      const updatedLikesCount = updatedCardData.likes.length;
-      return updatedLikesCount;
-    });
+
 }
 
 export function deleteLike(cardId) {

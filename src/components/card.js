@@ -69,8 +69,8 @@ export function createCard(
         });
     } else {
       putLike(cardId)
-        .then((updatedLikesCount) => {
-          likesCount.textContent = updatedLikesCount;
+      .then((updatedCardData) => {
+        likesCount.textContent = updatedCardData.likes.length;
           toggleLikeButton();
         })
         .catch((error) => {
