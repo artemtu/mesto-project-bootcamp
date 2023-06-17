@@ -48,28 +48,27 @@ export function createCard(
   cardImage.alt = name;
   likesCount.textContent = like;
 
-  likeButton
-    .addEventListener("click", () => {
-      if (likeButton.classList.contains("element__liked")) {
-        deleteLike(cardId).then((updatedLikesCount) => {
+  likeButton.addEventListener("click", () => {
+    if (likeButton.classList.contains("element__liked")) {
+      deleteLike(cardId)
+        .then((updatedLikesCount) => {
           likesCount.textContent = updatedLikesCount;
+          toggleLikeButton();
+        })
+        .catch((error) => {
+          console.error(error);
         });
-      } else {
-        putLike(cardId).then((updatedLikesCount) => {
+    } else {
+      putLike(cardId)
+        .then((updatedLikesCount) => {
           likesCount.textContent = updatedLikesCount;
+          toggleLikeButton();
+        })
+        .catch((error) => {
+          console.error(error);
         });
-      }
-      if (likeButton.classList.contains("element__like")) {
-        likeButton.classList.remove("element__like");
-        likeButton.classList.add("element__liked");
-      } else {
-        likeButton.classList.remove("element__liked");
-        likeButton.classList.add("element__like");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    }
+  });
 
   if (ownerId !== myId) {
     buttonDeleteCard.style.display = "none";
@@ -103,4 +102,14 @@ export function createCard(
 export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
+}
+
+function toggleLikeButton() {
+  if (likeButton.classList.contains("element__like")) {
+    likeButton.classList.remove("element__like");
+    likeButton.classList.add("element__liked");
+  } else {
+    likeButton.classList.remove("element__liked");
+    likeButton.classList.add("element__like");
+  }
 }
