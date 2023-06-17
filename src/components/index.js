@@ -85,8 +85,10 @@ function handleFormSubmitProfileAvatar(evt) {
     })
     .then(() => {
       resetForm(popupProfileAvatarForm);
-      resetButtonText(avatarSaveButton);
       closePopup(popupSectionAvatar);
+    })
+    .finally(() => {
+      resetButtonText(avatarSaveButton);
     })
     .catch((error) => {
       console.error(error);
@@ -112,8 +114,10 @@ function handleFormSubmitProfile(evt) {
   patchProfile(profileName, profileBio)
     .then(() => {
       resetForm(popupProfileForm);
-      resetButtonText(profileSaveButton);
       closePopup(popupProfile);
+    })
+    .finally(() => {
+      resetButtonText(profileSaveButton);
     })
     .catch((error) => {
       console.error(error);
@@ -146,8 +150,10 @@ function handleFormSubmitCard(evt) {
         )
       );
       resetForm(popupCardForm);
-      resetButtonText(cardSaveButton);
       closePopup(popupCardAdd);
+    })
+    .finally(() => {
+      resetButtonText(cardSaveButton);
     })
     .catch((error) => {
       console.error(error);
