@@ -1,21 +1,24 @@
-import '../../src/pages/index.css'
-import { disableButton, enableValidation } from "../components/validation.js";
-import { openPopup, closePopup } from "../components/modal.js";
+// import '../../src/pages/index.css'
+import { disableButton, enableValidation } from "./validation.js";
+import { openPopup, closePopup } from "./modal.js";
 import {
   popupCardButton,
   popupCardForm,
   popupCardAdd,
-  popupCardContainer,
   createCard,
-} from "../components/card.js";
-import { placeNameInput, linkInput } from "../components/card.js";
+} from "./card.js";
+import { placeNameInput, linkInput } from "./card.js";
 import {
-  getMyId,
+  getInfoProfile,
   getCards,
   patchProfile,
   postCard,
   updateAvatar,
-} from "../components/api.js";
+} from "./api.js";
+
+import { showLoadingStatus, resetForm, resetButtonText } from "./utils.js";
+
+let myId;
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");
@@ -60,6 +63,7 @@ const cardSaveButton = document.querySelector("#card-submit");
 const closeButtons = document.querySelectorAll(".popup__close-icon");
 
 export const popupLists = document.querySelectorAll(".popup");
+
 //==============================================================================//
 
 // закрытие всех попапов по кнопке
@@ -71,20 +75,24 @@ closeButtons.forEach((button) => {
 // Профиль АВАТАР =============================
 popupEditProfileAvatar.addEventListener("click", () => {
   openPopup(popupSectionAvatar);
-  disableButton(avatarSaveButton);
 });
 
 function handleFormSubmitProfileAvatar(evt) {
   evt.preventDefault();
   showLoadingStatus(avatarSaveButton);
   updateAvatar(avatarLinkInput)
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
     .then(() => {
       resetForm(popupProfileAvatarForm);
-      resetButtonText(avatarSaveButton);
       closePopup(popupSectionAvatar);
     })
+    .finally(() => {
+      resetButtonText(avatarSaveButton);
+      disableButton(avatarSaveButton);
+    })
     .catch((error) => {
-      // Обработка ошибок при обновлении аватара
       console.error(error);
     });
 }
@@ -102,14 +110,18 @@ popupEditProfileButton.addEventListener("click", () => {
 });
 function handleFormSubmitProfile(evt) {
   evt.preventDefault();
-  authorName.textContent = authorNameInput.value;
-  bio.textContent = bioInput.value;
+
   showLoadingStatus(profileSaveButton);
-  patchProfile()
+  patchProfile(authorNameInput, bioInput)
     .then(() => {
+      authorName.textContent = authorNameInput.value;
+      bio.textContent = bioInput.value;
+
       resetForm(popupProfileForm);
-      resetButtonText(profileSaveButton);
       closePopup(popupProfile);
+    })
+    .finally(() => {
+      resetButtonText(profileSaveButton);
     })
     .catch((error) => {
       console.error(error);
@@ -121,8 +133,7 @@ popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 // операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
-  openPopup(popupCardAdd, popupCardContainer);
-  disableButton(cardSaveButton);
+  openPopup(popupCardAdd);
 });
 
 function handleFormSubmitCard(evt) {
@@ -142,8 +153,11 @@ function handleFormSubmitCard(evt) {
         )
       );
       resetForm(popupCardForm);
-      resetButtonText(cardSaveButton);
       closePopup(popupCardAdd);
+    })
+    .finally(() => {
+      resetButtonText(cardSaveButton);
+      disableButton(cardSaveButton);
     })
     .catch((error) => {
       console.error(error);
@@ -156,27 +170,25 @@ popupCardForm.addEventListener("submit", handleFormSubmitCard);
 
 // добавление карточек //
 export function publishedCards() {
-  getMyId()
-    .then((myId) => {
-      getCards().then((data) => {
-        data.forEach((card) => {
-          const name = card.name;
-          const link = card.link;
-          const like = card.likes.length;
-          const ownerId = card.owner._id;
-          const cardId = card._id;
-          const likesArray = card.likes;
-          const createdCard = createCard(
-            name,
-            link,
-            like,
-            myId,
-            ownerId,
-            cardId,
-            likesArray
-          );
-          elementsContainer.append(createdCard);
-        });
+  getCards()
+    .then((data) => {
+      data.forEach((card) => {
+        const name = card.name;
+        const link = card.link;
+        const like = card.likes.length;
+        const ownerId = card.owner._id;
+        const cardId = card._id;
+        const likesArray = card.likes;
+        const createdCard = createCard(
+          name,
+          link,
+          like,
+          myId,
+          ownerId,
+          cardId,
+          likesArray
+        );
+        elementsContainer.append(createdCard);
       });
     })
     .catch((error) => {
@@ -199,17 +211,54 @@ enableValidation(validitySettings);
 
 // изменение текста на кнопках при отправке формы
 
-let originalButtonText;
+//==============================================//
+// БЛОК КОДА С СЕРВЕРА
 
-function showLoadingStatus(button) {
-  originalButtonText = button.textContent;
-  button.textContent = "Сохранение...";
-}
+getInfoProfile()
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileBio.textContent = data.about;
+    profileAvatar.src = data.avatar;
+    myId = data._id;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-function resetForm(form) {
-  form.reset();
-}
+Promise.all([getInfoProfile(), getCards()])
+  .then(([userData, cards]) => {
+    // Установка данных пользователя
+    profileName.textContent = userData.name;
+    profileBio.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+    // Отрисовка карточек
+    cards.forEach((card) => {
+      const name = card.name;
+      const link = card.link;
+      const like = card.likes.length;
+      const ownerId = card.owner._id;
+      const cardId = card._id;
+      const likesArray = card.likes;
+      const createdCard = createCard(
+        name,
+        link,
+        like,
+        myId,
+        ownerId,
+        cardId,
+        likesArray
+      );
+      elementsContainer.append(createdCard);
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-function resetButtonText(button) {
-  button.textContent = originalButtonText;
-}
+popupLists.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup__container_active")) {
+      closePopup(popup);
+    }
+  });
+});

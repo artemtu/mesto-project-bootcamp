@@ -4,7 +4,7 @@ import {
   popupSectionImage,
   popupImage,
   popupImageTitle,
-} from "../components/script.js";
+} from "./index.js";
 import { openPopup } from "../components/modal.js";
 import { dropCardFromServer, putLike, deleteLike } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
@@ -34,9 +34,9 @@ export function createCard(
   const textTitle = cardElement.querySelector(".element__title");
   const likeButton = cardElement.querySelector(".element__like");
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
-  let likesCount = cardElement.querySelector(".element__like-counter");
+  const likesCount = cardElement.querySelector(".element__like-counter");
 
-  const isLiked = likesArray.find(like => myId === like._id)
+  const isLiked = likesArray.find((like) => myId === like._id);
 
   if (isLiked) {
     likeButton.classList.remove("element__like");
@@ -47,23 +47,35 @@ export function createCard(
   cardImage.src = link;
   cardImage.alt = name;
   likesCount.textContent = like;
-
-  likeButton.addEventListener("click", () => {
-    if (likeButton.classList.contains("element__liked")) {
-      deleteLike(cardId).then((updatedLikesCount) => {
-        likesCount.textContent = updatedLikesCount;
-      });
-    } else {
-      putLike(cardId).then((updatedLikesCount) => {
-        likesCount.textContent = updatedLikesCount;
-      });
-    }
+  function toggleLikeButton() {
     if (likeButton.classList.contains("element__like")) {
       likeButton.classList.remove("element__like");
       likeButton.classList.add("element__liked");
     } else {
       likeButton.classList.remove("element__liked");
       likeButton.classList.add("element__like");
+    }
+  }
+
+  likeButton.addEventListener("click", () => {
+    if (likeButton.classList.contains("element__liked")) {
+      deleteLike(cardId)
+        .then((updatedCardData) => {
+          likesCount.textContent = updatedCardData.likes.length;
+          toggleLikeButton();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      putLike(cardId)
+      .then((updatedCardData) => {
+        likesCount.textContent = updatedCardData.likes.length;
+          toggleLikeButton();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   });
 
@@ -74,7 +86,13 @@ export function createCard(
   }
 
   buttonDeleteCard.addEventListener("click", () => {
-    cardElement.remove(), dropCardFromServer(cardId);
+    dropCardFromServer(cardId)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
   cardImage.addEventListener("click", () => {
     const imageUrl = cardImage.getAttribute("src");
@@ -92,4 +110,3 @@ export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
-
