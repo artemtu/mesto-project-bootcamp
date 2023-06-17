@@ -129,8 +129,7 @@ popupProfileForm.addEventListener("submit", handleFormSubmitProfile);
 // операции с попапом карточек =============================
 
 popupCardButton.addEventListener("click", () => {
-  openPopup(popupCardAdd, popupCardContainer);
-  disableButton(cardSaveButton);
+  openPopup(popupCardAdd);
 });
 
 function handleFormSubmitCard(evt) {
@@ -154,6 +153,7 @@ function handleFormSubmitCard(evt) {
     })
     .finally(() => {
       resetButtonText(cardSaveButton);
+      disableButton(cardSaveButton);
     })
     .catch((error) => {
       console.error(error);
