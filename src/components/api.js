@@ -1,7 +1,4 @@
 import {
-  profileAvatar,
-  profileBio,
-  profileName,
   publishedCards,
 } from "../components/script.js";
 
@@ -24,14 +21,6 @@ export function getInfoProfile() {
         return response.json();
       }
     })
-    .then((data) => {
-      profileName.textContent = data.name;
-      profileBio.textContent = data.about;
-      profileAvatar.src = data.avatar;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 }
 
 export function patchProfile() {

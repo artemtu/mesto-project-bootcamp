@@ -10,6 +10,7 @@ import {
 } from "../components/card.js";
 import { placeNameInput, linkInput } from "../components/card.js";
 import {
+  getInfoProfile,
   getMyId,
   getCards,
   patchProfile,
@@ -213,3 +214,18 @@ function resetForm(form) {
 function resetButtonText(button) {
   button.textContent = originalButtonText;
 }
+
+//==============================================//
+// БЛОК КОДА С СЕРВЕРА
+
+
+
+getInfoProfile()
+.then((data) => {
+  profileName.textContent = data.name;
+  profileBio.textContent = data.about;
+  profileAvatar.src = data.avatar;
+})
+.catch((error) => {
+  console.error(error);
+});
