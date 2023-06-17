@@ -223,11 +223,31 @@ getInfoProfile()
     console.error(error);
   });
 
-Promise.all([getInfoProfile(), , getCards()])
-  .then(([cards]) => {
-    getInfoProfile();
-    getCards();
-    publishedCards();
+Promise.all([getInfoProfile(), getCards()])
+  .then(([userData, cards]) => {
+    // Установка данных пользователя
+    profileName.textContent = userData.name;
+    profileBio.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+    // Отрисовка карточек
+    cards.forEach((card) => {
+      const name = card.name;
+      const link = card.link;
+      const like = card.likes.length;
+      const ownerId = card.owner._id;
+      const cardId = card._id;
+      const likesArray = card.likes;
+      const createdCard = createCard(
+        name,
+        link,
+        like,
+        myId,
+        ownerId,
+        cardId,
+        likesArray
+      );
+      elementsContainer.append(createdCard);
+    });
   })
   .catch((error) => {
     console.error(error);
