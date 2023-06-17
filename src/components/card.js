@@ -34,7 +34,7 @@ export function createCard(
   const textTitle = cardElement.querySelector(".element__title");
   const likeButton = cardElement.querySelector(".element__like");
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
-  let likesCount = cardElement.querySelector(".element__like-counter");
+  const likesCount = cardElement.querySelector(".element__like-counter");
 
   const isLiked = likesArray.find(like => myId === like._id)
 
