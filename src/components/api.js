@@ -61,11 +61,7 @@ export function getMyId() {
     });
 }
 
-Promise.all([getInfoProfile(), , getCards(), getMyId()]).then(([cards]) => {
-  getInfoProfile();
-  getCards();
-  publishedCards();
-});
+
 
 export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
@@ -107,7 +103,5 @@ export function updateAvatar(avatarLinkInput) {
     }),
   })
     .then(checkResponse)
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-    });
+
 }

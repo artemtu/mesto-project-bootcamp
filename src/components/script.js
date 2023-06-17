@@ -79,13 +79,15 @@ function handleFormSubmitProfileAvatar(evt) {
   evt.preventDefault();
   showLoadingStatus(avatarSaveButton);
   updateAvatar(avatarLinkInput)
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
     .then(() => {
       resetForm(popupProfileAvatarForm);
       resetButtonText(avatarSaveButton);
       closePopup(popupSectionAvatar);
     })
     .catch((error) => {
-      // Обработка ошибок при обновлении аватара
       console.error(error);
     });
 }
@@ -218,14 +220,18 @@ function resetButtonText(button) {
 //==============================================//
 // БЛОК КОДА С СЕРВЕРА
 
-
-
 getInfoProfile()
-.then((data) => {
-  profileName.textContent = data.name;
-  profileBio.textContent = data.about;
-  profileAvatar.src = data.avatar;
-})
-.catch((error) => {
-  console.error(error);
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileBio.textContent = data.about;
+    profileAvatar.src = data.avatar;
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+Promise.all([getInfoProfile(), , getCards()]).then(([cards]) => {
+  getInfoProfile();
+  getCards();
+  publishedCards();
 });
