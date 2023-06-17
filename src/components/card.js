@@ -47,6 +47,15 @@ export function createCard(
   cardImage.src = link;
   cardImage.alt = name;
   likesCount.textContent = like;
+  function toggleLikeButton() {
+    if (likeButton.classList.contains("element__like")) {
+      likeButton.classList.remove("element__like");
+      likeButton.classList.add("element__liked");
+    } else {
+      likeButton.classList.remove("element__liked");
+      likeButton.classList.add("element__like");
+    }
+  }
 
   likeButton.addEventListener("click", () => {
     if (likeButton.classList.contains("element__liked")) {
@@ -76,20 +85,23 @@ export function createCard(
     buttonDeleteCard.style.display = "flex";
   }
 
-  buttonDeleteCard
-    .addEventListener("click", () => {
-      cardElement.remove(), dropCardFromServer(cardId);
-    })
-
-  cardImage
-    .addEventListener("click", () => {
-      const imageUrl = cardImage.getAttribute("src");
-      const imageAlt = cardImage.getAttribute("alt");
-      popupImage.setAttribute("src", imageUrl);
-      popupImage.setAttribute("alt", imageAlt);
-      popupImageTitle.textContent = imageAlt;
-      openPopup(popupSectionImage);
-    });
+  // buttonDeleteCard.addEventListener("click", () => {
+  //   dropCardFromServer(cardId)
+  //     .then(() => {
+  //       cardElement.remove();
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // });
+  cardImage.addEventListener("click", () => {
+    const imageUrl = cardImage.getAttribute("src");
+    const imageAlt = cardImage.getAttribute("alt");
+    popupImage.setAttribute("src", imageUrl);
+    popupImage.setAttribute("alt", imageAlt);
+    popupImageTitle.textContent = imageAlt;
+    openPopup(popupSectionImage);
+  });
 
   return cardElement;
 }
@@ -97,14 +109,4 @@ export function createCard(
 export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
-}
-
-function toggleLikeButton() {
-  if (likeButton.classList.contains("element__like")) {
-    likeButton.classList.remove("element__like");
-    likeButton.classList.add("element__liked");
-  } else {
-    likeButton.classList.remove("element__liked");
-    likeButton.classList.add("element__like");
-  }
 }
