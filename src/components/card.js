@@ -36,7 +36,7 @@ export function createCard(
   const buttonDeleteCard = cardElement.querySelector(".element__delete-button");
   const likesCount = cardElement.querySelector(".element__like-counter");
 
-  const isLiked = likesArray.find(like => myId === like._id)
+  const isLiked = likesArray.find((like) => myId === like._id);
 
   if (isLiked) {
     likeButton.classList.remove("element__like");
@@ -48,24 +48,28 @@ export function createCard(
   cardImage.alt = name;
   likesCount.textContent = like;
 
-  likeButton.addEventListener("click", () => {
-    if (likeButton.classList.contains("element__liked")) {
-      deleteLike(cardId).then((updatedLikesCount) => {
-        likesCount.textContent = updatedLikesCount;
-      });
-    } else {
-      putLike(cardId).then((updatedLikesCount) => {
-        likesCount.textContent = updatedLikesCount;
-      });
-    }
-    if (likeButton.classList.contains("element__like")) {
-      likeButton.classList.remove("element__like");
-      likeButton.classList.add("element__liked");
-    } else {
-      likeButton.classList.remove("element__liked");
-      likeButton.classList.add("element__like");
-    }
-  });
+  likeButton
+    .addEventListener("click", () => {
+      if (likeButton.classList.contains("element__liked")) {
+        deleteLike(cardId).then((updatedLikesCount) => {
+          likesCount.textContent = updatedLikesCount;
+        });
+      } else {
+        putLike(cardId).then((updatedLikesCount) => {
+          likesCount.textContent = updatedLikesCount;
+        });
+      }
+      if (likeButton.classList.contains("element__like")) {
+        likeButton.classList.remove("element__like");
+        likeButton.classList.add("element__liked");
+      } else {
+        likeButton.classList.remove("element__liked");
+        likeButton.classList.add("element__like");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   if (ownerId !== myId) {
     buttonDeleteCard.style.display = "none";
@@ -73,17 +77,25 @@ export function createCard(
     buttonDeleteCard.style.display = "flex";
   }
 
-  buttonDeleteCard.addEventListener("click", () => {
-    cardElement.remove(), dropCardFromServer(cardId);
-  });
-  cardImage.addEventListener("click", () => {
-    const imageUrl = cardImage.getAttribute("src");
-    const imageAlt = cardImage.getAttribute("alt");
-    popupImage.setAttribute("src", imageUrl);
-    popupImage.setAttribute("alt", imageAlt);
-    popupImageTitle.textContent = imageAlt;
-    openPopup(popupSectionImage);
-  });
+  buttonDeleteCard
+    .addEventListener("click", () => {
+      cardElement.remove(), dropCardFromServer(cardId);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  cardImage
+    .addEventListener("click", () => {
+      const imageUrl = cardImage.getAttribute("src");
+      const imageAlt = cardImage.getAttribute("alt");
+      popupImage.setAttribute("src", imageUrl);
+      popupImage.setAttribute("alt", imageAlt);
+      popupImageTitle.textContent = imageAlt;
+      openPopup(popupSectionImage);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   return cardElement;
 }
@@ -92,4 +104,3 @@ export function addCardToPage(name, link) {
   const createdCard = createCard(name, link);
   elementsContainer.prepend(createdCard);
 }
-

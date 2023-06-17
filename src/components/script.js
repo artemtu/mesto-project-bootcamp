@@ -147,7 +147,6 @@ function handleFormSubmitCard(evt) {
       resetForm(popupCardForm);
       resetButtonText(cardSaveButton);
       closePopup(popupCardAdd);
-
     })
     .catch((error) => {
       console.error(error);
@@ -231,8 +230,12 @@ getInfoProfile()
     console.error(error);
   });
 
-Promise.all([getInfoProfile(), , getCards()]).then(([cards]) => {
-  getInfoProfile();
-  getCards();
-  publishedCards();
-});
+Promise.all([getInfoProfile(), , getCards()])
+  .then(([cards]) => {
+    getInfoProfile();
+    getCards();
+    publishedCards();
+  })
+  .catch((error) => {
+    console.error(error);
+  });
