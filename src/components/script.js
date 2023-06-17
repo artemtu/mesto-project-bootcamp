@@ -106,7 +106,7 @@ function handleFormSubmitProfile(evt) {
   authorName.textContent = authorNameInput.value;
   bio.textContent = bioInput.value;
   showLoadingStatus(profileSaveButton);
-  patchProfile()
+  patchProfile(profileName, profileBio)
     .then(() => {
       resetForm(popupProfileForm);
       resetButtonText(profileSaveButton);
