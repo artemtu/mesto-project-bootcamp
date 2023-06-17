@@ -5,13 +5,11 @@ import {
   popupCardButton,
   popupCardForm,
   popupCardAdd,
-  popupCardContainer,
   createCard,
 } from "./card.js";
 import { placeNameInput, linkInput } from "./card.js";
 import {
   getInfoProfile,
-  getMyId,
   getCards,
   patchProfile,
   postCard,
@@ -19,6 +17,8 @@ import {
 } from "./api.js";
 
 import { showLoadingStatus,resetForm, resetButtonText } from "./utils.js";
+
+
 
 let myId;
 
@@ -210,8 +210,6 @@ enableValidation(validitySettings);
 //==============================================//
 
 // изменение текста на кнопках при отправке формы
-
-let originalButtonText;
 
 
 //==============================================//

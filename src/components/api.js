@@ -1,5 +1,3 @@
-import { publishedCards } from "./index.js";
-
 import { checkResponse } from "./utils.js";
 
 const config = {
@@ -35,9 +33,6 @@ export function getCards() {
     headers: config.headers,
   })
     .then(checkResponse)
-    .then((data) => {
-      return data;
-    });
 }
 
 export function postCard(name, link) {
@@ -65,9 +60,7 @@ export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  })
-  
-  
+  });
 }
 
 export function putLike(cardId) {

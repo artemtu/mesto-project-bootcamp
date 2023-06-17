@@ -5,6 +5,7 @@ export function checkResponse(res) {
   return Promise.reject(`Ошибка ${res.status}`);
 }
 
+let originalButtonText;
 
 export function showLoadingStatus(button) {
   originalButtonText = button.textContent;
