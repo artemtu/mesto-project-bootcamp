@@ -26,8 +26,6 @@ export function patchProfile(name, bio) {
       name: name.textContent,
       about: bio.textContent,
     }),
-  }).catch((error) => {
-    console.error(error);
   });
 }
 
@@ -39,9 +37,6 @@ export function getCards() {
     .then(checkResponse)
     .then((data) => {
       return data;
-    })
-    .catch((error) => {
-      console.error(error);
     });
 }
 
@@ -53,11 +48,7 @@ export function postCard(name, link) {
       name,
       link,
     }),
-  })
-    .then(checkResponse)
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  });
 }
 
 export function getMyId() {
@@ -67,31 +58,20 @@ export function getMyId() {
     .then(checkResponse)
     .then((data) => {
       return data._id;
-    })
-    .catch((error) => {
-      console.error(error);
     });
 }
 
-Promise.all([getInfoProfile(), , getCards(), getMyId()])
-  .then(([cards]) => {
-    getInfoProfile();
-    getCards();
-    publishedCards();
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+Promise.all([getInfoProfile(), , getCards(), getMyId()]).then(([cards]) => {
+  getInfoProfile();
+  getCards();
+  publishedCards();
+});
 
 export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  })
-    .then(checkResponse)
-    .catch((error) => {
-      console.error(error);
-    });
+  });
 }
 
 export function putLike(cardId) {
@@ -103,10 +83,6 @@ export function putLike(cardId) {
     .then((updatedCardData) => {
       const updatedLikesCount = updatedCardData.likes.length;
       return updatedLikesCount;
-    })
-
-    .catch((error) => {
-      console.error(error);
     });
 }
 
@@ -119,9 +95,6 @@ export function deleteLike(cardId) {
     .then((updatedCardData) => {
       const updatedLikesCount = updatedCardData.likes.length;
       return updatedLikesCount;
-    })
-    .catch((error) => {
-      console.error(error);
     });
 }
 
@@ -136,8 +109,5 @@ export function updateAvatar(avatarLinkInput) {
     .then(checkResponse)
     .then((data) => {
       profileAvatar.src = data.avatar;
-    })
-    .catch((error) => {
-      console.error(error);
     });
 }
