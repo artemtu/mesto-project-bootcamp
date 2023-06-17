@@ -1,4 +1,4 @@
-import { publishedCards } from "../components/script.js";
+import { publishedCards } from "./index.js";
 
 import { checkResponse } from "./utils.js";
 

@@ -1,14 +1,14 @@
 // import '../../src/pages/index.css'
-import { disableButton, enableValidation } from "../components/validation.js";
-import { openPopup, closePopup } from "../components/modal.js";
+import { disableButton, enableValidation } from "./validation.js";
+import { openPopup, closePopup } from "./modal.js";
 import {
   popupCardButton,
   popupCardForm,
   popupCardAdd,
   popupCardContainer,
   createCard,
-} from "../components/card.js";
-import { placeNameInput, linkInput } from "../components/card.js";
+} from "./card.js";
+import { placeNameInput, linkInput } from "./card.js";
 import {
   getInfoProfile,
   getMyId,
@@ -16,7 +16,7 @@ import {
   patchProfile,
   postCard,
   updateAvatar,
-} from "../components/api.js";
+} from "./api.js";
 
 // попап профиль
 const popupProfile = document.querySelector(".popup-profile");

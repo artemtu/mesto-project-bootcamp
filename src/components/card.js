@@ -4,7 +4,7 @@ import {
   popupSectionImage,
   popupImage,
   popupImageTitle,
-} from "../components/script.js";
+} from "./index.js";
 import { openPopup } from "../components/modal.js";
 import { dropCardFromServer, putLike, deleteLike } from "./api.js";
 export const popupCardAdd = document.querySelector(".popup_add");
