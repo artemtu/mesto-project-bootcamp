@@ -46,15 +46,7 @@ export function postCard(name, link) {
   }).then(checkResponse);
 }
 
-export function getMyId() {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  })
-    .then(checkResponse)
-    .then((data) => {
-      return data._id;
-    });
-}
+
 
 export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
