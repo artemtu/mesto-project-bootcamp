@@ -49,7 +49,7 @@ export function dropCardFromServer(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
-  });
+  }).then(checkResponse);
 }
 
 export function putLike(cardId) {
