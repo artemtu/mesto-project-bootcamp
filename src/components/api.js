@@ -24,7 +24,7 @@ export function patchProfile(authorNameInput, bioInput) {
       name: authorNameInput.value,
       about: bioInput.value,
     }),
-  });
+  }).then(checkResponse);
 }
 
 // данные карточек
