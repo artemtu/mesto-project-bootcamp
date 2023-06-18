@@ -1,4 +1,4 @@
-// import '../../src/pages/index.css'
+import '../../src/pages/index.css'
 import { disableButton, enableValidation } from "./validation.js";
 import { openPopup, closePopup } from "./modal.js";
 import {

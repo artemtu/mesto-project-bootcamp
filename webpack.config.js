@@ -16,7 +16,7 @@ module.exports = {
       directory: path.resolve(__dirname, "dist"),
     },
     compress: true,
-    port: 8081,
+    port: 8080,
     open: true,
   },
   module: {
