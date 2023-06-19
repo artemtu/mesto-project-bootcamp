@@ -153,11 +153,11 @@ function handleFormSubmitCard(evt) {
         )
       );
       resetForm(popupCardForm);
+      disableButton(cardSaveButton);
       closePopup(popupCardAdd);
     })
     .finally(() => {
       resetButtonText(cardSaveButton);
-      disableButton(cardSaveButton);
     })
     .catch((error) => {
       console.error(error);
