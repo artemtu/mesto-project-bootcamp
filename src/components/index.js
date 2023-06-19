@@ -188,16 +188,7 @@ enableValidation(validitySettings);
 //==============================================//
 // БЛОК КОДА С СЕРВЕРА
 
-getInfoProfile()
-  .then((data) => {
-    profileName.textContent = data.name;
-    profileBio.textContent = data.about;
-    profileAvatar.src = data.avatar;
-    myId = data._id;
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
 
 Promise.all([getInfoProfile(), getCards()])
   .then(([userData, cards]) => {
@@ -205,6 +196,7 @@ Promise.all([getInfoProfile(), getCards()])
     profileName.textContent = userData.name;
     profileBio.textContent = userData.about;
     profileAvatar.src = userData.avatar;
+    myId = userData._id;
     // Отрисовка карточек
     cards.forEach((card) => {
       const name = card.name;
