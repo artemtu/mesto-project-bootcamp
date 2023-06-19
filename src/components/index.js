@@ -120,11 +120,11 @@ function handleFormSubmitProfile(evt) {
       resetForm(popupProfileForm);
       closePopup(popupProfile);
     })
-    .finally(() => {
-      resetButtonText(profileSaveButton);
-    })
     .catch((error) => {
       console.error(error);
+    })
+    .finally(() => {
+      resetButtonText(profileSaveButton);
     });
 }
 
