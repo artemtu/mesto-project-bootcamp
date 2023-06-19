@@ -1,4 +1,4 @@
-import '../../src/pages/index.css'
+import "../../src/pages/index.css";
 import { disableButton, enableValidation } from "./validation.js";
 import { openPopup, closePopup } from "./modal.js";
 import {
@@ -86,11 +86,11 @@ function handleFormSubmitProfileAvatar(evt) {
     })
     .then(() => {
       resetForm(popupProfileAvatarForm);
+      disableButton(avatarSaveButton);
       closePopup(popupSectionAvatar);
     })
     .finally(() => {
       resetButtonText(avatarSaveButton);
-      disableButton(avatarSaveButton);
     })
     .catch((error) => {
       console.error(error);
